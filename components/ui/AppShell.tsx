@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth, DEMO_USERS } from '@/lib/auth/authContext';
@@ -33,12 +33,46 @@ import {
   X,
   Sliders,
   HelpCircle,
-  Star,
+  Home,
+  Globe,
+  Clock,
   Sparkles
 } from 'lucide-react';
 
 interface AppShellProps {
   children: React.ReactNode;
+}
+
+// Live Time Display component inspired by Once UI Header
+function TimeDisplay() {
+  const [timeStr, setTimeStr] = useState('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTimeStr(
+        now.toLocaleTimeString('en-IN', {
+          timeZone: 'Asia/Kolkata',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        })
+      );
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (!timeStr) return null;
+
+  return (
+    <div className="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400">
+      <Clock className="w-3.5 h-3.5 text-zinc-500" />
+      <span>{timeStr} IST</span>
+    </div>
+  );
 }
 
 export function AppShell({ children }: AppShellProps) {
@@ -61,7 +95,6 @@ export function AppShell({ children }: AppShellProps) {
     switchUser(roleKey);
     setUserDropdownOpen(false);
 
-    // Route to appropriate section
     if (roleKey.startsWith('INSTITUTION')) {
       router.push('/institution/overview');
     } else if (roleKey.startsWith('AICTE')) {
@@ -146,230 +179,199 @@ export function AppShell({ children }: AppShellProps) {
   const currentNav = isInstitution ? institutionNav : isAicte ? aicteNav : isStudent ? studentNav : isVerifier ? verifierNav : [];
 
   return (
-    <div className="min-h-screen flex flex-col bg-zinc-950 font-sans text-zinc-100 selection:bg-amber-400 selection:text-zinc-950">
-      {/* Top Persistent Demo Banner */}
-      <div className="bg-zinc-900/90 text-zinc-400 px-4 py-2 text-xs flex flex-wrap items-center justify-between border-b border-white/10 backdrop-blur-md">
-        <div className="flex items-center gap-2.5">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-mono font-semibold bg-amber-400/10 text-amber-300 border border-amber-400/20 text-[10px] tracking-wide">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-400"></span>
-            </span>
-            SIH SANDBOX
-          </span>
-          <span className="truncate text-zinc-400 hidden sm:inline text-[11px]">
-            AICTE Regulation Bureau • 10 Pre-Seeded Academic Scenarios Active
-          </span>
-        </div>
-
-        <div className="flex items-center gap-4 text-[11px] ml-auto">
-          <div className="flex items-center gap-2">
-            <span className="text-zinc-500 uppercase tracking-wider text-[10px]">AY:</span>
-            <select
-              value={activeAcademicYear}
-              onChange={(e) => setActiveAcademicYear(e.target.value)}
-              className="bg-zinc-900 text-zinc-200 border border-white/10 rounded-full px-2.5 py-0.5 text-xs font-medium focus:outline-none focus:border-white/30"
-            >
-              <option value="2026-27">2026-27 (Current)</option>
-              <option value="2025-26">2025-26</option>
-              <option value="2024-25">2024-25</option>
-            </select>
-          </div>
-
-          <button
-            onClick={handleResetData}
-            disabled={isResetting}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white transition-all border border-white/10 text-xs"
-            title="Reset synthetic database to clean initial state"
-          >
-            <RotateCcw className={`w-3 h-3 ${isResetting ? 'animate-spin' : ''}`} />
-            <span>{isResetting ? 'Resetting...' : 'Reset State'}</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Main Top Header */}
-      <header className="bg-zinc-950/80 border-b border-white/10 sticky top-0 z-40 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo and Brand */}
-            <div className="flex items-center gap-3">
-              <Link href="/" className="flex items-center gap-3 group">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/15 flex items-center justify-center text-white shadow-xl group-hover:scale-105 transition-transform">
-                  <span className="font-serif font-black text-lg tracking-wider text-[#ffcd75]">अ</span>
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg font-bold text-white tracking-tight">APAAR ONE</span>
-                    <span className="px-2 py-0.5 bg-white/10 text-zinc-300 text-[10px] font-semibold rounded-full border border-white/15 uppercase tracking-wider">
-                      AICTE
-                    </span>
-                  </div>
-                  <p className="text-[10px] text-zinc-400 uppercase tracking-widest hidden sm:block">
-                    One Academic Identity • Every Enrolment Verified
-                  </p>
-                </div>
-              </Link>
-            </div>
-
-            {/* Portal Switcher Tabs */}
-            <nav className="hidden lg:flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/10 text-xs backdrop-blur-md">
-              <Link
-                href="/"
-                className={`px-3.5 py-1.5 rounded-full font-medium transition-all ${
-                  isPublic ? 'bg-white text-zinc-950 shadow-md font-semibold' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Public
-              </Link>
-              <Link
-                href="/institution/overview"
-                className={`px-3.5 py-1.5 rounded-full font-medium transition-all ${
-                  isInstitution ? 'bg-white text-zinc-950 shadow-md font-semibold' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Institution
-              </Link>
-              <Link
-                href="/aicte/overview"
-                className={`px-3.5 py-1.5 rounded-full font-medium transition-all ${
-                  isAicte ? 'bg-white text-zinc-950 shadow-md font-semibold' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                AICTE Bureau
-              </Link>
-              <Link
-                href="/student/overview"
-                className={`px-3.5 py-1.5 rounded-full font-medium transition-all ${
-                  isStudent ? 'bg-white text-zinc-950 shadow-md font-semibold' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Student
-              </Link>
-              <Link
-                href="/verifier/overview"
-                className={`px-3.5 py-1.5 rounded-full font-medium transition-all ${
-                  isVerifier ? 'bg-white text-zinc-950 shadow-md font-semibold' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Verifier
-              </Link>
-            </nav>
-
-            {/* Right Side: Demo Persona Selector */}
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <button
-                  onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs transition-all text-left group"
-                >
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-amber-400 to-[#ffcd75] text-zinc-950 font-bold flex items-center justify-center text-[10px]">
-                    {currentUser.name.charAt(0)}
-                  </div>
-                  <div className="hidden sm:block">
-                    <div className="text-xs font-semibold text-white leading-none">
-                      {currentUser.name.split(' ')[0]}
-                    </div>
-                    <div className="text-[10px] text-zinc-400 uppercase tracking-wider mt-0.5">
-                      {currentUser.role.replace(/_/g, ' ')}
-                    </div>
-                  </div>
-                  <ChevronDown className="w-3.5 h-3.5 text-zinc-400 group-hover:text-white transition-colors" />
-                </button>
-
-                {/* Dropdown Menu */}
-                {userDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-80 rounded-2xl bg-zinc-900 border border-white/15 shadow-2xl p-2 z-50 animate-fade-in backdrop-blur-2xl">
-                    <div className="px-3 py-2 border-b border-white/10 mb-1">
-                      <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                        <Sparkles className="w-3 h-3 text-amber-400" />
-                        Switch Demo Persona
-                      </div>
-                      <p className="text-xs text-zinc-300 mt-0.5">Instant role switching for evaluators</p>
-                    </div>
-
-                    <div className="space-y-1">
-                      {Object.entries(DEMO_USERS).map(([key, u]) => (
-                        <button
-                          key={key}
-                          onClick={() => handleRoleSwitch(key)}
-                          className={`w-full text-left px-3 py-2 rounded-xl text-xs flex items-center justify-between transition-colors ${
-                            currentUser.id === u.id
-                              ? 'bg-white/15 text-white font-medium border border-white/15'
-                              : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                          }`}
-                        >
-                          <div>
-                            <div className="font-medium text-white">{u.name}</div>
-                            <div className="text-[10px] text-zinc-400">{u.institutionName || 'AICTE Bureau'}</div>
-                          </div>
-                          {currentUser.id === u.id && (
-                            <Check className="w-4 h-4 text-emerald-400" />
-                          )}
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="mt-2 pt-2 border-t border-white/10">
-                      <Link
-                        href="/sign-in"
-                        onClick={() => setUserDropdownOpen(false)}
-                        className="block text-center text-xs text-zinc-400 hover:text-white py-1 transition-colors"
-                      >
-                        Explore All Personas & Credentials →
-                      </Link>
-                    </div>
-                  </div>
-                )}
+    <div className="min-h-screen flex flex-col bg-[#08080a] font-sans text-zinc-100 selection:bg-cyan-500 selection:text-black once-bg-dots once-spotlight relative">
+      
+      {/* Once UI Floating Header Island */}
+      <header className="sticky top-3 z-50 px-4 sm:px-6 max-w-7xl w-full mx-auto">
+        <div className="flex items-center justify-between gap-3">
+          
+          {/* Left: Location & Authority Status Badge */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="w-8 h-8 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-[#ffcd75] font-serif font-bold text-sm shadow-md transition-transform group-hover:scale-105">
+                अ
               </div>
-
-              {/* Mobile menu toggle */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-zinc-400 hover:text-white"
-              >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
+              <div className="flex flex-col">
+                <span className="text-xs font-bold tracking-tight text-white leading-none">APAAR ONE</span>
+                <span className="text-[10px] text-zinc-400 leading-tight flex items-center gap-1.5 mt-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  New Delhi, IN • AICTE Bureau
+                </span>
+              </div>
+            </Link>
           </div>
+
+          {/* Center: Once UI Floating Translucent Dock */}
+          <nav className="once-dock rounded-full px-2 py-1.5 flex items-center gap-1 text-xs mx-auto md:mx-0 shadow-2xl">
+            <Link
+              href="/"
+              className={`px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-all ${
+                isPublic ? 'bg-white text-zinc-950 font-semibold shadow-sm' : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              <Home className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Overview</span>
+            </Link>
+
+            <div className="w-px h-4 bg-white/15 mx-0.5" />
+
+            <Link
+              href="/institution/overview"
+              className={`px-3 py-1.5 rounded-full transition-all ${
+                isInstitution ? 'bg-white text-zinc-950 font-semibold shadow-sm' : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              Institution
+            </Link>
+
+            <Link
+              href="/aicte/overview"
+              className={`px-3 py-1.5 rounded-full transition-all ${
+                isAicte ? 'bg-white text-zinc-950 font-semibold shadow-sm' : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              AICTE Bureau
+            </Link>
+
+            <Link
+              href="/student/overview"
+              className={`px-3 py-1.5 rounded-full transition-all ${
+                isStudent ? 'bg-white text-zinc-950 font-semibold shadow-sm' : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              Student
+            </Link>
+
+            <Link
+              href="/verifier/overview"
+              className={`px-3 py-1.5 rounded-full transition-all ${
+                isVerifier ? 'bg-white text-zinc-950 font-semibold shadow-sm' : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              Verifier
+            </Link>
+          </nav>
+
+          {/* Right: Live Digital Clock & Persona Switcher */}
+          <div className="flex items-center gap-3">
+            <div className="hidden lg:block">
+              <TimeDisplay />
+            </div>
+
+            {/* Persona Switcher Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                className="once-dock px-3 py-1.5 rounded-full text-xs flex items-center gap-2 hover:border-white/20 transition-all text-left"
+              >
+                <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-amber-400 to-[#ffcd75] text-zinc-950 font-bold flex items-center justify-center text-[10px]">
+                  {currentUser.name.charAt(0)}
+                </div>
+                <span className="hidden sm:inline text-xs font-medium text-zinc-200">
+                  {currentUser.name.split(' ')[0]}
+                </span>
+                <ChevronDown className="w-3 h-3 text-zinc-400" />
+              </button>
+
+              {userDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-72 rounded-2xl bg-zinc-900/95 border border-white/15 shadow-2xl p-2 z-50 animate-fade-in backdrop-blur-2xl">
+                  <div className="px-3 py-2 border-b border-white/10 mb-1">
+                    <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                      <Sparkles className="w-3 h-3 text-[#ffcd75]" />
+                      Switch Evaluator Persona
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    {Object.entries(DEMO_USERS).map(([key, u]) => (
+                      <button
+                        key={key}
+                        onClick={() => handleRoleSwitch(key)}
+                        className={`w-full text-left px-3 py-1.5 rounded-xl text-xs flex items-center justify-between transition-colors ${
+                          currentUser.id === u.id
+                            ? 'bg-white/15 text-white font-medium border border-white/15'
+                            : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-medium text-white">{u.name}</div>
+                          <div className="text-[10px] text-zinc-400">{u.institutionName || 'AICTE Bureau'}</div>
+                        </div>
+                        {currentUser.id === u.id && (
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="mt-2 pt-2 border-t border-white/10 flex items-center justify-between px-2">
+                    <button
+                      onClick={handleResetData}
+                      disabled={isResetting}
+                      className="text-[11px] text-zinc-400 hover:text-white flex items-center gap-1.5 transition-colors"
+                    >
+                      <RotateCcw className={`w-3 h-3 ${isResetting ? 'animate-spin' : ''}`} />
+                      <span>{isResetting ? 'Resetting...' : 'Reset Demo State'}</span>
+                    </button>
+                    <Link
+                      href="/sign-in"
+                      onClick={() => setUserDropdownOpen(false)}
+                      className="text-[11px] text-[#ffcd75] hover:underline"
+                    >
+                      All Roles →
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile menu icon */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden once-dock p-2 rounded-full text-zinc-400 hover:text-white"
+            >
+              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
+          </div>
+
         </div>
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-white/10 bg-zinc-950 p-4 space-y-3">
+          <div className="md:hidden mt-2 once-dock rounded-2xl p-3 space-y-2 animate-fade-in">
             <div className="grid grid-cols-2 gap-2 text-xs font-medium">
               <Link
                 href="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-center"
+                className="px-3 py-2 rounded-xl bg-white/5 text-white text-center"
               >
                 Public Home
               </Link>
               <Link
                 href="/institution/overview"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-center"
+                className="px-3 py-2 rounded-xl bg-white/5 text-white text-center"
               >
                 Institution
               </Link>
               <Link
                 href="/aicte/overview"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-center"
+                className="px-3 py-2 rounded-xl bg-white/5 text-white text-center"
               >
                 AICTE Bureau
               </Link>
               <Link
                 href="/student/overview"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-center"
+                className="px-3 py-2 rounded-xl bg-white/5 text-white text-center"
               >
                 Student Portal
               </Link>
               <Link
                 href="/verifier/overview"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-center col-span-2"
+                className="px-3 py-2 rounded-xl bg-white/5 text-white text-center col-span-2"
               >
                 External Verifier Portal
               </Link>
@@ -378,16 +380,16 @@ export function AppShell({ children }: AppShellProps) {
         )}
       </header>
 
-      {/* Main Container */}
-      <div className="flex-1 flex flex-col lg:flex-row max-w-7xl w-full mx-auto">
+      {/* Main Workspace Body */}
+      <div className="flex-1 flex flex-col lg:flex-row max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 gap-6">
         {/* Workspace Sidebar (when inside a portal) */}
         {!isPublic && currentNav.length > 0 && (
-          <aside className="w-full lg:w-64 bg-zinc-950 border-r border-white/10 lg:min-h-[calc(100vh-6rem)] p-4 flex-shrink-0">
-            <div className="mb-4 pb-3 border-b border-white/10">
+          <aside className="w-full lg:w-64 once-card rounded-3xl p-5 flex-shrink-0 space-y-5 h-fit lg:sticky lg:top-20">
+            <div className="pb-3 border-b border-white/10">
               <div className="text-[10px] uppercase font-semibold text-zinc-500 tracking-wider">
                 {isInstitution ? 'Institution Workspace' : isAicte ? 'Regulation Bureau' : isStudent ? 'Citizen Workspace' : 'Verifier Console'}
               </div>
-              <div className="text-xs font-semibold text-white mt-1 truncate">
+              <div className="text-xs font-bold text-white mt-1 truncate">
                 {currentUser.institutionName || (isAicte ? 'AICTE Central HQ, New Delhi' : isVerifier ? 'TCS Background Services' : 'Student Identity Desk')}
               </div>
             </div>
@@ -402,7 +404,7 @@ export function AppShell({ children }: AppShellProps) {
                     href={item.href}
                     className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                       isActive
-                        ? 'bg-white/10 text-white border border-white/15 font-semibold shadow-sm'
+                        ? 'bg-white/15 text-white font-semibold shadow-sm border border-white/15'
                         : 'text-zinc-400 hover:text-white hover:bg-white/5'
                     }`}
                   >
@@ -421,7 +423,7 @@ export function AppShell({ children }: AppShellProps) {
             </nav>
 
             {/* Quick Context Card */}
-            <div className="mt-8 p-3 rounded-2xl bg-white/5 border border-white/10 text-[11px] text-zinc-400 backdrop-blur-md">
+            <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-[11px] text-zinc-400">
               <div className="flex items-center gap-2 font-medium text-white mb-1">
                 <Shield className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Zero Trust Active</span>
@@ -434,14 +436,14 @@ export function AppShell({ children }: AppShellProps) {
         )}
 
         {/* Content Area */}
-        <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 min-w-0">
           {children}
         </main>
       </div>
 
       {/* Persistent Toast notification */}
       {resetSuccessToast && (
-        <div className="fixed bottom-6 right-6 z-50 bg-zinc-900 border border-emerald-500/50 text-emerald-300 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-fade-in backdrop-blur-xl">
+        <div className="fixed bottom-6 right-6 z-50 once-dock text-emerald-300 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-fade-in">
           <Check className="w-4 h-4 text-emerald-400" />
           <span className="text-xs font-medium">Synthetic database reset to initial 10 test scenarios.</span>
         </div>
