@@ -2,111 +2,131 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { 
-  Database, 
-  Scale, 
-  ShieldCheck, 
-  QrCode, 
-  History, 
-  Cpu, 
-  Sliders, 
-  FileCheck2,
-  CheckCircle2,
-  Zap,
-  ArrowRight
-} from 'lucide-react';
+import { ArrowRight, Sparkles, Building2, Scale, Users, Search, ShieldCheck, CheckCircle2, Lock, Cpu, QrCode } from 'lucide-react';
 
 export default function FeaturesPage() {
-  const features = [
+  const portalFeatures = [
     {
-      title: 'Decoupled Identity & Enrolment Model',
-      desc: 'One immutable student identity reference maps to multiple time-bounded enrolment records over time. Enables complete tracking of transfers, diploma migrations, and multi-year lifecycle events without duplicate entity creation.',
-      icon: Database,
-      badge: 'Core Architecture',
-    },
-    {
-      title: 'Dynamic Policy-as-Code Seat Engine',
-      desc: 'Formulates AICTE Approval Process Handbook (APH) regulations into versioned, testable logic. Models Regular approved intake, supernumerary TFW (5%), NRI/FN (15%), and Lateral Entry (10%) with mathematical transparency.',
+      title: 'AICTE Regulation Bureau Console',
       icon: Scale,
-      badge: 'Regulatory Engine',
+      color: 'text-amber-400',
+      features: [
+        'National Enrolment Intelligence & Regional Heatmap',
+        'Cross-State Concurrent Enrolment Triage Desk',
+        'Automated Seat Capacity & Over-Intake Violation Flags',
+        'Policy-as-Code Rule Sandbox for APH 2024-27 Clauses',
+        'Immutable SHA-256 Chained Cryptographic Audit Trail',
+      ],
     },
     {
-      title: 'Deterministic & Anomaly Reconciliation',
-      desc: 'Cross-institution conflict identification flags overlapping active admission dates and duplicate APAAR submissions with evidence provenance, reason codes, and human review states.',
-      icon: ShieldCheck,
-      badge: 'Reconciliation',
+      title: 'Institution Administration Workspace',
+      icon: Building2,
+      color: 'text-[#ffcd75]',
+      features: [
+        'Drag-and-Drop CSV Batch Uploads with Live Preview',
+        'Instant APAAR Format & Registry Mismatch Resolver',
+        'Policy-Compliant Supernumerary Quota Calculator',
+        'Adjudication Portal for Transfer Certificate Hand-offs',
+        'Campus ERP Webhook Integrations & Role-Based Access Control',
+      ],
     },
     {
-      title: 'Opaque Privacy-Preserving Verification',
-      desc: 'Issues short-lived opaque verification references. Verifiers verify valid enrolment without accessing raw personal data or unmasked 12-digit identifiers, fully respecting DPDP Act 2023 principles.',
-      icon: QrCode,
-      badge: 'Verification',
+      title: 'Citizen Student Portal',
+      icon: Users,
+      color: 'text-emerald-400',
+      features: [
+        'Digital Masked APAAR Card (XXXX-XXXX-4819)',
+        'Audited Unmasking for Authorized Identity Reviews',
+        '1-Click Consent Gate for Third-Party Background Checks',
+        'Self-Service Demographic Data Correction Tracking',
+        'DPDP-Compliant Disclosure & Sharing Ledger',
+      ],
     },
     {
-      title: 'Append-Only Audit Trail',
-      desc: 'Every sensitive operation—including batch submissions, identity reveals, case resolutions, and policy publications—is recorded in an immutable audit ledger with correlation IDs and timestamps.',
-      icon: History,
-      badge: 'Governance',
-    },
-    {
-      title: 'Institutional ERP API Integration',
-      desc: 'Provides secure REST endpoints for university ERPs and student management systems with idempotency keys, column mapping templates, and live connection health diagnostics.',
-      icon: Cpu,
-      badge: 'Interoperability',
+      title: 'External Verifier Portal',
+      icon: Search,
+      color: 'text-purple-400',
+      features: [
+        'Single & Bulk Candidate Academic Enrolment Queries',
+        'Instant Signed QR Code Scanner (Camera & Manual Token)',
+        'Tamper-Evident Enrolment Verification Certificates',
+        'Cryptographic Token Integrity Checking (ECDSA-P256)',
+        'Developer REST API Keys & ATS Integration Sandbox',
+      ],
     },
   ];
 
   return (
-    <div className="max-w-5xl mx-auto py-8 space-y-12">
+    <div className="max-w-5xl mx-auto py-12 space-y-12 font-sans text-white">
+      {/* Header */}
       <div className="space-y-4">
-        <span className="px-3 py-1 rounded-full bg-blue-50 text-govblue-700 text-xs font-semibold border border-blue-200">
-          Platform Capabilities
-        </span>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-navy-900">
-          Enterprise Features for National Academic Governance
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-xs font-semibold backdrop-blur-md">
+          <Sparkles className="w-3.5 h-3.5 text-[#ffcd75]" />
+          <span>Platform Capabilities</span>
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
+          Enterprise Features for <span className="bg-gradient-to-r from-white via-white to-[#ffcd75] bg-clip-text text-transparent">Every Stakeholder</span>
         </h1>
-        <p className="text-base text-slate-600 leading-relaxed">
-          Engineered for accuracy, privacy, explainability, and regulatory compliance across thousands of institutions.
+        <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
+          Four purpose-built portals sharing the same unified data architecture, zero-trust security model, and regulatory policy engine.
         </p>
       </div>
 
+      {/* 4 Feature Columns */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {features.map((f) => {
-          const Icon = f.icon;
+        {portalFeatures.map((pf, idx) => {
+          const IconC = pf.icon;
           return (
             <div
-              key={f.title}
-              className="bg-white p-6 rounded-2xl border border-borderLine shadow-subtle space-y-4 hover:border-slate-300 transition-all"
+              key={idx}
+              className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-xl flex flex-col justify-between hover:border-white/20 transition-all hover:-translate-y-1"
             >
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-navy-900">
-                  <Icon className="w-5 h-5 text-govblue-600" />
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 rounded-2xl bg-white/10">
+                    <IconC className={`w-6 h-6 ${pf.color}`} />
+                  </div>
+                  <h3 className="text-lg font-bold text-white">{pf.title}</h3>
                 </div>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600">
-                  {f.badge}
-                </span>
+
+                <div className="h-px w-full bg-white/10 my-4" />
+
+                <ul className="space-y-3">
+                  {pf.features.map((feat, fIdx) => (
+                    <li key={fIdx} className="flex items-start gap-2.5 text-xs text-zinc-300">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="text-lg font-bold text-navy-900">{f.title}</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">{f.desc}</p>
+
+              <div className="mt-8 pt-4 border-t border-white/10">
+                <Link
+                  href="/sign-in"
+                  className="inline-flex items-center gap-2 text-xs font-semibold text-white hover:text-[#ffcd75] transition-colors"
+                >
+                  Test in Sandbox Environment →
+                </Link>
+              </div>
             </div>
           );
         })}
       </div>
 
-      <div className="bg-navy-900 text-white rounded-2xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-elevated">
-        <div>
-          <h3 className="text-xl font-bold">Experience the Platform Live</h3>
-          <p className="text-xs text-slate-300 mt-1">Switch between all 5 workspaces seamlessly in our SIH prototype environment.</p>
-        </div>
-        <Link
-          href="/institution/overview"
-          className="px-5 py-2.5 bg-govteal-600 hover:bg-govteal-700 text-white rounded-xl text-xs font-semibold transition-colors flex items-center gap-2 flex-shrink-0"
+      {/* Navigation CTA */}
+      <div className="flex justify-between items-center pt-6 border-t border-white/10">
+        <Link href="/how-it-works" className="text-xs text-zinc-400 hover:text-white transition-colors">
+          ← How It Works
+        </Link>
+        <Link 
+          href="/security-privacy"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 transition-all hover:scale-105"
         >
-          <span>Open Institution Workspace</span>
-          <ArrowRight className="w-4 h-4" />
+          Security & DPDP Safeguards
+          <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>
     </div>
   );
 }
-

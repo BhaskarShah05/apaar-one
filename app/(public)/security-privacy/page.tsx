@@ -1,81 +1,103 @@
 'use client';
 
 import React from 'react';
-import { Lock, ShieldCheck, EyeOff, Key, Database, FileText, CheckCircle2 } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, Sparkles, ShieldCheck, Lock, EyeOff, FileText, CheckCircle2, History, AlertTriangle } from 'lucide-react';
 
 export default function SecurityPrivacyPage() {
-  const securityControls = [
+  const safeguards = [
     {
-      title: 'Digital Personal Data Protection (DPDP) Act 2023 Alignment',
-      desc: 'The architecture adheres strictly to India’s DPDP Act, 2023 and DPDP Rules, 2025. Clearly separates regulatory reporting authority from student-consented third-party disclosures.',
-      icon: ShieldCheck,
+      title: 'Masked APAAR Identifier by Default',
+      desc: 'All user interfaces render APAAR as XXXX-XXXX-4819. Only authorized administrators with explicit business necessity can unmask references.',
+      badge: 'DPDP Minimization',
     },
     {
-      title: 'Strict Data Minimization & No Aadhaar Ingestion',
-      desc: 'APAAR ONE never requests, collects, or stores Aadhaar numbers. APAAR references are 12-digit academic identifiers, eliminating high-risk biometric or sensitive personal identifier exposure.',
-      icon: EyeOff,
+      title: 'Audited Unmasking Provenance',
+      desc: 'Clicking unmask triggers an immediate immutable event (SECURITY_APPAR_UNMASKED) recording actor identity, IP, timestamp, and justification.',
+      badge: 'Accountability',
     },
     {
-      title: 'Keyed HMAC Pseudonymization for Duplicate Matching',
-      desc: 'Internal equality checks and cross-institution deduplication operate on keyed SHA-256 HMAC tokens. The raw 12-digit APAAR is kept within an encrypted, isolated boundary.',
-      icon: Key,
+      title: 'Opaque Verification Tokens (Zero Raw PII in QR)',
+      desc: 'QR codes and verification hyperlinks contain short-lived cryptographically signed opaque tokens (e.g. TOK-VER-98234-A7). They never embed raw student names, Aadhaar, or phone numbers.',
+      badge: 'Zero Trust QR',
     },
     {
-      title: 'Opaque QR Payloads & Zero PII on Public Networks',
-      desc: 'QR codes contain short-lived, opaque random references (e.g., tok_v8f921ab). Scanning a QR resolves server-side to verified claims only after authentication. No raw PII is embedded in QR images or public URLs.',
-      icon: Lock,
-    },
-    {
-      title: 'Tenant Row-Scoping & Server-Side RBAC',
-      desc: 'Institution users can strictly access only records belonging to their authenticated institution context. College A cannot read, query, or mutate College B records via UI or API.',
-      icon: Database,
-    },
-    {
-      title: 'Tamper-Evident Immutable Audit Logging',
-      desc: 'Every sensitive operation—including APAAR reveals, case triage decisions, and report downloads—is logged with actor, role, correlation ID, timestamp, and IP provenance.',
-      icon: FileText,
+      title: 'Student Consent Governance Desk',
+      desc: 'External verifier requests trigger notification to the student. Records are inaccessible until the student approves or legal regulatory mandate applies.',
+      badge: 'Consent Architecture',
     },
   ];
 
   return (
-    <div className="max-w-5xl mx-auto py-8 space-y-12">
+    <div className="max-w-5xl mx-auto py-12 space-y-12 font-sans text-white">
+      {/* Header */}
       <div className="space-y-4">
-        <span className="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-semibold border border-teal-200">
-          Trust & Compliance Framework
-        </span>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-navy-900">
-          Security, Privacy & Consent Architecture
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-xs font-semibold backdrop-blur-md">
+          <Sparkles className="w-3.5 h-3.5 text-[#ffcd75]" />
+          <span>Security, Encryption & DPDP Act 2023</span>
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
+          Privacy-by-Design <span className="bg-gradient-to-r from-white via-white to-[#ffcd75] bg-clip-text text-transparent">Safeguards</span>
         </h1>
-        <p className="text-base text-slate-600 leading-relaxed">
-          National educational records require defense-in-depth engineering. APAAR ONE incorporates privacy-by-design from inception.
+        <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
+          How APAAR ONE protects citizen privacy, enforces data minimization, and guarantees cryptographic integrity across every transaction.
         </p>
       </div>
 
+      {/* Safeguards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {securityControls.map((c) => {
-          const Icon = c.icon;
-          return (
-            <div
-              key={c.title}
-              className="bg-white p-6 rounded-2xl border border-borderLine shadow-subtle space-y-3"
-            >
-              <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-200 text-teal-700 flex items-center justify-center">
-                <Icon className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-navy-900">{c.title}</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">{c.desc}</p>
+        {safeguards.map((sg, idx) => (
+          <div
+            key={idx}
+            className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-xl space-y-3 hover:border-white/20 transition-all hover:-translate-y-1"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-semibold text-zinc-400 border border-white/10 px-2.5 py-0.5 rounded-full bg-white/5 uppercase tracking-wider">
+                {sg.badge}
+              </span>
+              <ShieldCheck className="w-5 h-5 text-emerald-400" />
             </div>
-          );
-        })}
+            <h3 className="text-lg font-bold text-white">{sg.title}</h3>
+            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">{sg.desc}</p>
+          </div>
+        ))}
       </div>
 
-      <div className="bg-slate-100 rounded-2xl p-6 border border-slate-200 text-xs text-slate-600 space-y-2">
-        <p className="font-bold text-navy-900 text-sm">Regulatory Notice Regarding SIH Demonstration</p>
-        <p>
-          All student names, APAAR-like strings, and institutional records demonstrated in this prototype are synthetic fixtures created solely for testing system mechanics. Live production deployments will interface exclusively through authorized government gateways (e.g. APISetu, ABC Registry) following official onboarding and data protection audits.
-        </p>
+      {/* DPDP Compliance Card */}
+      <div className="rounded-3xl border border-white/10 bg-black/40 p-8 backdrop-blur-xl space-y-4">
+        <h2 className="text-lg font-bold text-white flex items-center gap-2">
+          <Lock className="w-5 h-5 text-[#ffcd75]" />
+          Digital Personal Data Protection Act (DPDP 2023) Alignment
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-zinc-300 pt-2">
+          <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+            <span className="font-bold text-white block mb-1">Purpose Limitation</span>
+            Data collected solely for academic enrolment validation and capacity compliance.
+          </div>
+          <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+            <span className="font-bold text-white block mb-1">Storage Minimization</span>
+            No permanent caching of biometrics, Aadhaar numbers, or financial information.
+          </div>
+          <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+            <span className="font-bold text-white block mb-1">Right to Correction</span>
+            Students track and request correction of demographic registry mismatches directly.
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation CTA */}
+      <div className="flex justify-between items-center pt-6 border-t border-white/10">
+        <Link href="/features" className="text-xs text-zinc-400 hover:text-white transition-colors">
+          ← Platform Features
+        </Link>
+        <Link 
+          href="/help"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 transition-all hover:scale-105"
+        >
+          Help & Support Desk
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
     </div>
   );
 }
-

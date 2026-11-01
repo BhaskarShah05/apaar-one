@@ -2,107 +2,100 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, UploadCloud, ShieldAlert, Scale, QrCode, Database, Eye } from 'lucide-react';
+import { ArrowRight, Sparkles, Database, ShieldCheck, Scale, QrCode, FileText, CheckCircle2 } from 'lucide-react';
 
 export default function HowItWorksPage() {
-  const steps = [
+  const lifecycleSteps = [
     {
       num: '01',
-      title: 'Authoritative Institution & Programme Scoping',
-      desc: 'Institutions log into their isolated workspace. Approved intake quotas and supernumerary category entitlements (TFW, Lateral, NRI) are imported directly from AICTE approval records. Institutions cannot unilaterally alter approved seats.',
-      icon: Database,
+      title: 'Batch Submission & ERP Telemetry',
+      actor: 'Participating Institution',
+      desc: 'Colleges upload student admissions via CSV batch files or automated campus ERP API webhooks. The intake parser validates schema, column definitions, and duplicate roll numbers before staging.',
+      badge: 'Institution Gateway',
     },
     {
       num: '02',
-      title: 'Bulk Ingestion & Column Mapping',
-      desc: 'Operators upload student admission datasets via standard CSV/XLSX or ERP webhook. The schema mapper automatically aligns uploaded headers to canonical fields (institution_student_id, apaar_id, admission_date, category).',
-      icon: UploadCloud,
+      title: 'APAAR Identity Adapter Normalization',
+      actor: 'MoE Registry Interface',
+      desc: 'The pipeline queries the national APAAR/ABC registry adapter. It maps responses cleanly into VERIFIED, FORMAT_VALID, NOT_FOUND, or MISMATCH states with full idempotency.',
+      badge: 'Identity Verification',
     },
     {
       num: '03',
-      title: 'Gateway Identity Normalization & Fault Handling',
-      desc: 'The Identity Gateway queries the mock/authorized APAAR provider. It distinguishes format validity from registry verification, handling PENDING, UNAVAILABLE (504 timeout), MISMATCH, and NOT_FOUND states without silent failure.',
-      icon: ShieldAlert,
+      title: 'Cross-Institution Reconciler',
+      actor: 'AICTE Central Rules Engine',
+      desc: 'Deterministic queries scan across all 12,000+ AICTE institutions for concurrent active enrolments in the same academic year. Overlaps are routed to a neutral adjudication desk.',
+      badge: 'Duplicate Prevention',
     },
     {
       num: '04',
-      title: 'Cross-Institution Conflict & Duplicate Detection',
-      desc: 'The reconciliation engine compares the student HMAC against national active enrolments. If a candidate appears actively admitted across two institutions with overlapping dates, an evidence-first review case is generated.',
-      icon: CheckCircle2,
+      title: 'Policy-as-Code Seat Compliance',
+      actor: 'Regulation Bureau Evaluator',
+      desc: 'Admissions are verified mathematically against AICTE Approval Process Handbook (APH 2024-27) limits. Regular intake is strictly separated from 5% TFW and 10% Lateral Entry supernumeraries.',
+      badge: 'Sanction Enforcement',
     },
     {
       num: '05',
-      title: 'Policy-as-Code Capacity Calculation',
-      desc: 'Each admitted student is classified into their respective intake bucket. The policy engine evaluates whether admissions stay within base intake or approved supernumerary limits, preventing unapproved admissions.',
-      icon: Scale,
-    },
-    {
-      num: '06',
-      title: 'Student-Consented Opaque Verification',
-      desc: 'Authorized employers or background verification agencies request enrolment proof. Students grant consent via their portal, producing an opaque, signed verification token and QR code without exposing raw APAAR or Aadhaar data.',
-      icon: QrCode,
+      title: 'Consent-Gated Verification Desk',
+      actor: 'Authorized Verifiers & Citizens',
+      desc: 'Employers submit background checks. Verification decisions require citizen consent or authorized mandate. Tamper-evident proofs and signed QR tokens are issued with zero raw PII.',
+      badge: 'Zero-Trust Verification',
     },
   ];
 
   return (
-    <div className="max-w-5xl mx-auto py-8 space-y-12">
+    <div className="max-w-5xl mx-auto py-12 space-y-12 font-sans text-white">
+      {/* Header */}
       <div className="space-y-4">
-        <span className="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-semibold border border-teal-200">
-          Architecture & Process
-        </span>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-navy-900">
-          How Data Moves Across APAAR ONE
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-xs font-semibold backdrop-blur-md">
+          <Sparkles className="w-3.5 h-3.5 text-[#ffcd75]" />
+          <span>System Architecture & Lifecycle</span>
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
+          How <span className="bg-gradient-to-r from-white via-white to-[#ffcd75] bg-clip-text text-transparent">APAAR ONE</span> Works
         </h1>
-        <p className="text-base text-slate-600 leading-relaxed">
-          From institutional data entry to national regulatory monitoring and student-consented third-party verification, every event is auditable, explainable, and privacy-preserving.
+        <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
+          From institutional admission filing to cryptographic employer verification, every transaction is audited, privacy-preserved, and mathematically validated.
         </p>
       </div>
 
-      {/* Step by Step Timeline */}
-      <div className="space-y-6">
-        {steps.map((s) => {
-          const Icon = s.icon;
-          return (
-            <div
-              key={s.num}
-              className="bg-white p-6 rounded-2xl border border-borderLine shadow-subtle flex flex-col md:flex-row items-start gap-6 hover:border-slate-300 transition-all"
-            >
-              <div className="w-12 h-12 rounded-xl bg-navy-900 text-teal-400 font-mono font-bold flex items-center justify-center flex-shrink-0 text-base shadow-sm">
-                {s.num}
-              </div>
-              <div className="flex-1 space-y-2">
-                <div className="flex items-center gap-3">
-                  <h3 className="text-lg font-bold text-navy-900">{s.title}</h3>
-                </div>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{s.desc}</p>
-              </div>
+      {/* 5-Step Process */}
+      <div className="space-y-4">
+        {lifecycleSteps.map((s, idx) => (
+          <div
+            key={idx}
+            className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur-xl shadow-xl flex flex-col md:flex-row items-start gap-6 hover:border-white/20 transition-all"
+          >
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white font-mono font-bold text-xl flex-shrink-0 border border-white/10">
+              {s.num}
             </div>
-          );
-        })}
+            <div className="flex-1 space-y-2">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h3 className="text-lg font-bold text-white">{s.title}</h3>
+                <span className="text-[10px] font-semibold text-zinc-400 border border-white/10 px-2.5 py-0.5 rounded-full bg-white/5 uppercase tracking-wider">
+                  {s.badge}
+                </span>
+              </div>
+              <p className="text-xs text-amber-300 font-medium">Actor: {s.actor}</p>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
       </div>
 
-      {/* Try Demo CTAs */}
-      <div className="bg-slate-100 rounded-2xl p-6 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div>
-          <p className="text-sm font-bold text-navy-900">Ready to test the workflow interactively?</p>
-          <p className="text-xs text-slate-500">Jump right into the institution upload wizard or AICTE alert triage.</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <Link
-            href="/institution/uploads"
-            className="px-4 py-2 bg-navy-900 text-white rounded-xl text-xs font-semibold hover:bg-navy-800 transition-colors"
-          >
-            Upload Wizard Demo
-          </Link>
-          <Link
-            href="/aicte/alerts"
-            className="px-4 py-2 bg-white text-navy-900 border border-slate-300 rounded-xl text-xs font-semibold hover:bg-slate-50 transition-colors"
-          >
-            Review Conflict Cases
-          </Link>
-        </div>
+      {/* Footer Navigation */}
+      <div className="flex justify-between items-center pt-6 border-t border-white/10">
+        <Link href="/about" className="text-xs text-zinc-400 hover:text-white transition-colors">
+          ← About APAAR ONE
+        </Link>
+        <Link 
+          href="/features"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 transition-all hover:scale-105"
+        >
+          View Feature Capabilities
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
     </div>
   );
 }
-

@@ -49,7 +49,7 @@ export function IdentityMask({
 
   if (maskedValue === 'NOT_SUBMITTED' || !maskedValue) {
     return (
-      <span className={`inline-flex items-center text-xs font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200 ${className}`}>
+      <span className={`inline-flex items-center text-xs font-mono text-zinc-400 bg-white/5 px-2.5 py-0.5 rounded-full border border-white/10 ${className}`}>
         Provisional (Pending APAAR)
       </span>
     );
@@ -57,21 +57,27 @@ export function IdentityMask({
 
   return (
     <div className={`inline-flex items-center gap-1.5 font-mono text-xs ${className}`}>
-      <span className={`px-2 py-0.5 rounded border ${revealed ? 'bg-amber-50 text-amber-900 border-amber-300 font-semibold' : 'bg-slate-50 text-slate-700 border-slate-200'}`}>
+      <span className={`px-2.5 py-0.5 rounded-full border transition-colors ${revealed ? 'bg-amber-400/10 text-amber-300 border-amber-400/30 font-semibold' : 'bg-white/5 text-zinc-200 border-white/10'}`}>
         {revealed ? fullValue : maskedValue}
       </span>
+
       {allowReveal && (
         <button
           type="button"
           onClick={toggleReveal}
           disabled={isLogging}
-          title={revealed ? 'Mask APAAR' : 'Audit-logged authorized reveal'}
-          className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded transition-colors"
+          title={revealed ? 'Mask APAAR Reference' : 'Reveal full APAAR (Audited Action)'}
+          className="p-1 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
         >
-          {revealed ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+          {revealed ? <EyeOff className="w-3.5 h-3.5 text-amber-400" /> : <Eye className="w-3.5 h-3.5" />}
         </button>
+      )}
+
+      {revealed && (
+        <span className="text-[10px] text-amber-400 font-sans tracking-wide">
+          Audited
+        </span>
       )}
     </div>
   );
 }
-

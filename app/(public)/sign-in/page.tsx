@@ -12,7 +12,9 @@ import {
   Key, 
   Lock, 
   CheckCircle2,
-  Users
+  Users,
+  Sparkles,
+  Sliders
 } from 'lucide-react';
 
 export default function SignInPage() {
@@ -58,152 +60,129 @@ export default function SignInPage() {
       name: 'Dr. S. K. Gupta',
       roleLabel: 'Policy Bureau Director',
       org: 'AICTE Policy & Academic Standards Division',
-      desc: 'Manages versioned Policy-as-Code seat entitlement rules (APH 2024-27).',
+      desc: 'Authoring Policy-as-Code rules, intake compliance algorithms, and sanctions matrix.',
       route: '/aicte/policies',
-      icon: Key,
+      icon: Sliders,
       badge: 'Policy Scope',
     },
     {
       key: 'STUDENT',
-      name: 'Aarav Sharma',
-      roleLabel: 'Enrolled Technical Student',
-      org: 'APAAR ID: 9021-3847-1092 • Delhi Institute of Technology',
-      desc: 'View academic enrolment history, approve third-party background checks, raise corrections.',
+      name: 'Kabir Singhania',
+      roleLabel: 'Citizen Student (Active Enrolment)',
+      org: 'APAAR ID: 9021-3847-1092',
+      desc: 'View personal academic identity, check active enrolments, and approve or deny verifications.',
       route: '/student/overview',
       icon: Users,
-      badge: 'Self-Sovereign Identity',
+      badge: 'Citizen Scope',
     },
     {
       key: 'EXTERNAL_VERIFIER',
-      name: 'P. Sengupta',
-      roleLabel: 'Talent Screening Agency Verifier',
-      org: 'TechCorp Background Screening Services Pvt Ltd',
-      desc: 'Submit scoped enrolment verification queries and resolve tamper-evident QR proofs.',
+      name: 'Aditi Rao',
+      roleLabel: 'Corporate HR Verifier',
+      org: 'Tata Consultancy Services - Talent Operations',
+      desc: 'Request academic checks, inspect verified results, and query validation tokens.',
       route: '/verifier/overview',
       icon: Search,
-      badge: 'Authorized Verifier',
+      badge: 'Verifier Scope',
     },
   ];
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const targetPersona = personas.find((p) => p.key === selectedRole);
     switchUser(selectedRole);
-    const target = personas.find(p => p.key === selectedRole)?.route || '/institution/overview';
+
     setTimeout(() => {
-      router.push(target);
+      setIsSubmitting(false);
+      router.push(targetPersona ? targetPersona.route : '/institution/overview');
     }, 400);
   };
 
-  const activePersona = personas.find(p => p.key === selectedRole);
-
   return (
-    <div className="max-w-4xl mx-auto py-10 space-y-8">
-      <div className="text-center space-y-2">
-        <h1 className="text-3xl font-extrabold text-navy-900">
-          Sign In to APAAR ONE
-        </h1>
-        <p className="text-xs sm:text-sm text-slate-600">
-          Role-aware authentication gateway with server-side tenant isolation and MFA.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left: Persona Picker */}
-        <div className="lg:col-span-7 space-y-3">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-            Select Demo Persona / Institution Scope
+    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-zinc-950 font-sans text-white">
+      <div className="max-w-4xl w-full space-y-8">
+        
+        {/* Header */}
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md mb-4">
+            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-[#ffcd75]" />
+              SIH Sandbox Authentication Gateway
+            </span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+            Access <span className="bg-gradient-to-r from-white via-white to-[#ffcd75] bg-clip-text text-transparent">APAAR ONE</span>
+          </h1>
+          <p className="mt-2 text-sm text-zinc-400">
+            Select a verified persona to test role-specific workflows across institutions, regulators, students, or employers.
           </p>
-          <div className="space-y-2">
-            {personas.map((p) => {
-              const isSelected = selectedRole === p.key;
-              const Icon = p.icon;
+        </div>
+
+        <form onSubmit={handleSignIn} className="space-y-6">
+          {/* Persona Selection Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {personas.map((persona) => {
+              const IconComp = persona.icon;
+              const isSelected = selectedRole === persona.key;
+
               return (
                 <div
-                  key={p.key}
-                  onClick={() => setSelectedRole(p.key)}
-                  className={`p-4 rounded-xl border text-left cursor-pointer transition-all ${
+                  key={persona.key}
+                  onClick={() => setSelectedRole(persona.key)}
+                  className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                     isSelected
-                      ? 'bg-white border-govblue-600 shadow-card ring-1 ring-govblue-600'
-                      : 'bg-white border-borderLine hover:border-slate-300 shadow-subtle'
+                      ? 'bg-white/10 border-white/40 shadow-xl scale-[1.02]'
+                      : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
                   }`}
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${isSelected ? 'bg-govblue-50 text-govblue-600' : 'bg-slate-100 text-slate-500'}`}>
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold text-navy-900">{p.name}</p>
-                        <p className="text-[11px] font-medium text-govblue-600">{p.roleLabel}</p>
-                      </div>
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="p-2 rounded-xl bg-white/10 text-white">
+                      <IconComp className="w-5 h-5 text-[#ffcd75]" />
                     </div>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600">
-                      {p.badge}
+                    <span className="text-[10px] font-semibold text-zinc-400 border border-white/10 px-2 py-0.5 rounded-full bg-white/5">
+                      {persona.badge}
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-2 truncate">{p.org}</p>
+
+                  <h3 className="font-bold text-sm text-white">{persona.name}</h3>
+                  <p className="text-xs text-amber-300 font-medium mt-0.5">{persona.roleLabel}</p>
+                  <p className="text-[11px] text-zinc-400 mt-1 line-clamp-1">{persona.org}</p>
+
+                  <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px]">
+                    <span className="text-zinc-500">Destination:</span>
+                    <span className="font-mono text-zinc-300">{persona.route}</span>
+                  </div>
                 </div>
               );
             })}
           </div>
-        </div>
 
-        {/* Right: Authenticate Form Card */}
-        <div className="lg:col-span-5 bg-white p-6 rounded-2xl border border-borderLine shadow-card space-y-6">
-          <div className="border-b border-slate-100 pb-4">
-            <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Authentication Context</span>
-            <h2 className="text-base font-bold text-navy-900 mt-1">{activePersona?.name}</h2>
-            <p className="text-xs text-slate-500">{activePersona?.roleLabel}</p>
-            <div className="mt-2 text-[11px] text-slate-600 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-              <span className="font-semibold text-navy-900">Active Scope: </span>
-              {activePersona?.org}
-            </div>
-          </div>
-
-          <form onSubmit={handleSignIn} className="space-y-4">
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Academic Year</label>
-              <input
-                type="text"
-                disabled
-                value={`${activeAcademicYear} (AICTE Official Cycle)`}
-                className="w-full text-xs px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-slate-600 cursor-not-allowed"
-              />
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <label className="block text-xs font-semibold text-slate-700">One-Time MFA Password</label>
-                <span className="text-[10px] text-teal-600 font-semibold flex items-center gap-1">
-                  <ShieldCheck className="w-3 h-3" /> Auto-populated
-                </span>
+          {/* Credentials Card */}
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                <Lock className="w-5 h-5" />
               </div>
-              <input
-                type="text"
-                value={mfaCode}
-                onChange={(e) => setMfaCode(e.target.value)}
-                className="w-full text-xs font-mono px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:border-govblue-600"
-              />
-              <p className="text-[10px] text-slate-400 mt-1">Simulated 6-digit cryptographic authenticator token</p>
+              <div>
+                <div className="text-xs font-semibold text-white">Passkey & MFA Simulation</div>
+                <div className="text-[11px] text-zinc-400">Pre-authenticated for smart evaluator walkthroughs</div>
+              </div>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-2.5 px-4 bg-navy-900 hover:bg-navy-800 text-white rounded-xl text-xs font-semibold shadow-subtle flex items-center justify-center gap-2 transition-all"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-xl"
             >
-              <span>{isSubmitting ? 'Authenticating...' : `Enter ${activePersona?.badge}`}</span>
+              <span>{isSubmitting ? 'Entering Workspace...' : 'Enter Selected Portal'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
-          </form>
-
-          <div className="pt-4 border-t border-slate-100 text-[11px] text-slate-400 text-center">
-            Secured via OIDC / OAuth2 mock session handler
           </div>
-        </div>
+        </form>
+
       </div>
     </div>
   );
 }
-

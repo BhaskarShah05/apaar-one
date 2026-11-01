@@ -8,7 +8,6 @@ import {
   Clock, 
   HelpCircle, 
   ShieldCheck, 
-  FileCheck2,
   AlertOctagon,
   Ban
 } from 'lucide-react';
@@ -23,9 +22,9 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
   const norm = status?.toUpperCase() || 'UNKNOWN';
 
   let config = {
-    bg: 'bg-slate-100',
-    text: 'text-slate-700',
-    border: 'border-slate-200',
+    bg: 'bg-white/5',
+    text: 'text-zinc-300',
+    border: 'border-white/10',
     label: status,
     icon: HelpCircle,
   };
@@ -40,9 +39,9 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
     case 'SUCCESS':
     case 'COMPLIANT':
       config = {
-        bg: 'bg-teal-50',
-        text: 'text-teal-800',
-        border: 'border-teal-200',
+        bg: 'bg-emerald-500/10',
+        text: 'text-emerald-300',
+        border: 'border-emerald-500/20',
         label: norm === 'LEGITIMATE_TRANSFER' ? 'Legitimate Transfer' : norm === 'VERIFIED' ? 'Verified' : status,
         icon: ShieldCheck,
       };
@@ -50,119 +49,87 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
 
     case 'ACTIVE':
       config = {
-        bg: 'bg-blue-50',
-        text: 'text-blue-800',
-        border: 'border-blue-200',
+        bg: 'bg-blue-500/10',
+        text: 'text-blue-300',
+        border: 'border-blue-500/20',
         label: 'Active Enrolment',
         icon: CheckCircle2,
       };
       break;
 
+    case 'PROVISIONAL':
     case 'FORMAT_VALID':
       config = {
-        bg: 'bg-sky-50',
-        text: 'text-sky-800',
-        border: 'border-sky-200',
-        label: 'Format Valid (Check Pending)',
-        icon: FileCheck2,
-      };
-      break;
-
-    case 'PENDING':
-    case 'PENDING_VALIDATION':
-    case 'PENDING_STUDENT_CONSENT':
-    case 'UNDER_REVIEW':
-    case 'OPEN':
-    case 'WARNING':
-    case 'DRAFT':
-      config = {
-        bg: 'bg-amber-50',
-        text: 'text-amber-800',
-        border: 'border-amber-200',
-        label: norm === 'PENDING_STUDENT_CONSENT' ? 'Pending Consent' : norm === 'UNDER_REVIEW' ? 'Under Review' : status,
+        bg: 'bg-indigo-500/10',
+        text: 'text-indigo-300',
+        border: 'border-indigo-500/20',
+        label: norm === 'FORMAT_VALID' ? 'Format Valid (Pending Sync)' : 'Provisional Admission',
         icon: Clock,
       };
       break;
 
-    case 'NOT_SUBMITTED':
+    case 'PENDING':
+    case 'PENDING_VERIFICATION':
+    case 'UNDER_REVIEW':
+    case 'PENDING_STUDENT_CONSENT':
+    case 'TRANSFERRED':
       config = {
-        bg: 'bg-slate-100',
-        text: 'text-slate-600',
-        border: 'border-slate-300',
-        label: 'APAAR Pending',
-        icon: HelpCircle,
-      };
-      break;
-
-    case 'UNAVAILABLE':
-      config = {
-        bg: 'bg-orange-50',
-        text: 'text-orange-800',
-        border: 'border-orange-200',
-        label: 'Provider Timeout (504)',
+        bg: 'bg-amber-500/10',
+        text: 'text-amber-300',
+        border: 'border-amber-500/20',
+        label: norm === 'PENDING_STUDENT_CONSENT' ? 'Consent Required' : norm === 'UNDER_REVIEW' ? 'Review Case' : status,
         icon: AlertTriangle,
       };
       break;
 
-    case 'MISMATCH':
-    case 'REJECTED':
-    case 'ERROR':
-    case 'CONFIRMED_DUPLICATE':
-    case 'EXCEEDED_CAPACITY':
+    case 'NON_COMPLIANT':
     case 'OVER_CAPACITY':
+    case 'UNAUTHORIZED':
+    case 'CANCELLED':
+    case 'MISMATCH':
+    case 'DUPLICATE_FLAG':
+    case 'FAILED':
+    case 'EXCEEDED':
       config = {
-        bg: 'bg-red-50',
-        text: 'text-red-800',
-        border: 'border-red-200',
-        label: norm === 'CONFIRMED_DUPLICATE' ? 'Duplicate Confirmed' : status,
-        icon: XCircle,
+        bg: 'bg-rose-500/10',
+        text: 'text-rose-300',
+        border: 'border-rose-500/20',
+        label: norm === 'OVER_CAPACITY' ? 'Over Capacity' : norm === 'MISMATCH' ? 'Data Mismatch' : status,
+        icon: AlertOctagon,
       };
       break;
 
-    case 'BLOCKER':
-    case 'QUARANTINED':
-    case 'SUSPENDED':
-    case 'DECLINED':
+    case 'WITHDRAWN':
+    case 'REVOKED':
+    case 'BLOCKED':
       config = {
-        bg: 'bg-rose-100',
-        text: 'text-rose-900',
-        border: 'border-rose-300',
+        bg: 'bg-zinc-800',
+        text: 'text-zinc-400',
+        border: 'border-white/10',
         label: status,
         icon: Ban,
       };
       break;
 
-    case 'TRANSFERRED_OUT':
+    default:
       config = {
-        bg: 'bg-purple-50',
-        text: 'text-purple-800',
-        border: 'border-purple-200',
-        label: 'Transferred Out',
-        icon: FileCheck2,
+        bg: 'bg-white/5',
+        text: 'text-zinc-300',
+        border: 'border-white/10',
+        label: status,
+        icon: HelpCircle,
       };
-      break;
-
-    case 'WITHDRAWN':
-      config = {
-        bg: 'bg-zinc-100',
-        text: 'text-zinc-700',
-        border: 'border-zinc-300',
-        label: 'Withdrawn',
-        icon: AlertOctagon,
-      };
-      break;
   }
 
-  const Icon = config.icon;
-  const padding = size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-2.5 py-1 text-xs';
+  const IconComponent = config.icon;
+  const sizeClasses = size === 'sm' ? 'px-2 py-0.5 text-[10px]' : 'px-2.5 py-1 text-xs';
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 font-medium rounded-md border ${config.bg} ${config.text} ${config.border} ${padding} ${className}`}
+      className={`inline-flex items-center gap-1.5 font-medium rounded-full border backdrop-blur-md tracking-wide ${config.bg} ${config.text} ${config.border} ${sizeClasses} ${className}`}
     >
-      <Icon className={size === 'sm' ? 'w-3 h-3' : 'w-3.5 h-3.5'} />
-      <span>{config.label}</span>
+      <IconComponent className={size === 'sm' ? 'w-3 h-3 flex-shrink-0' : 'w-3.5 h-3.5 flex-shrink-0'} />
+      <span className="capitalize">{config.label.toLowerCase().replace(/_/g, ' ')}</span>
     </span>
   );
 }
-
