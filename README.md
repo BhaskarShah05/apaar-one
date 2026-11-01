@@ -5,6 +5,13 @@
 
 ---
 
+## Live Links
+
+- **Production Deployment (Vercel)**: [https://apaar-one.vercel.app](https://apaar-one.vercel.app)
+- **Source Code Repository (GitHub)**: [https://github.com/BhaskarShah05/apaar-one](https://github.com/BhaskarShah05/apaar-one)
+
+---
+
 ## Executive Summary
 
 **APAAR ONE** is a unified, multi-tenant academic enrolment management and verification ecosystem built specifically for AICTE-approved higher education institutions across India. It grounds institutional enrolment verification and regulatory seat compliance on the Ministry of Education's 12-digit **Automated Permanent Academic Account Registry (APAAR / EduLocker) ID**, while cleanly separating **Identity Reference** from **Academic Awards / Credentials** (which remain governed by DigiLocker/NAD).
