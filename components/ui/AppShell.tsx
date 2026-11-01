@@ -84,6 +84,7 @@ export function AppShell({ children }: AppShellProps) {
   const [resetSuccessToast, setResetSuccessToast] = useState(false);
 
   // Determine which portal is active based on path
+  const isHomePage = pathname === '/';
   const isPublic = pathname === '/' || pathname.startsWith('/about') || pathname.startsWith('/how-it-works') || pathname.startsWith('/features') || pathname.startsWith('/security-privacy') || pathname.startsWith('/help') || pathname.startsWith('/sign-in');
   const isInstitution = pathname.startsWith('/institution');
   const isAicte = pathname.startsWith('/aicte');
@@ -180,9 +181,10 @@ export function AppShell({ children }: AppShellProps) {
   return (
     <div className="min-h-screen flex flex-col bg-[#fbfbfd] font-sans text-zinc-900 selection:bg-zinc-900 selection:text-white once-bg-dots once-spotlight relative">
       
-      {/* Once UI Floating Header Island (Light Mode) */}
-      <header className="sticky top-3 z-50 px-4 sm:px-6 max-w-7xl w-full mx-auto">
-        <div className="flex items-center justify-between gap-3">
+      {/* Once UI Floating Header Island (Non-Home Pages) */}
+      {!isHomePage && (
+        <header className="sticky top-3 z-50 px-4 sm:px-6 max-w-7xl w-full mx-auto">
+          <div className="flex items-center justify-between gap-3">
           
           {/* Left: Location & Authority Status Badge */}
           <div className="hidden md:flex items-center gap-3">
@@ -378,67 +380,74 @@ export function AppShell({ children }: AppShellProps) {
           </div>
         )}
       </header>
+      )}
 
       {/* Main Workspace Body */}
-      <div className="flex-1 flex flex-col lg:flex-row max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 gap-6">
-        {/* Workspace Sidebar (when inside a portal) */}
-        {!isPublic && currentNav.length > 0 && (
-          <aside className="w-full lg:w-64 once-card rounded-3xl p-5 flex-shrink-0 space-y-5 h-fit lg:sticky lg:top-20">
-            <div className="pb-3 border-b border-zinc-100">
-              <div className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">
-                {isInstitution ? 'Institution Workspace' : isAicte ? 'Regulation Bureau' : isStudent ? 'Citizen Workspace' : 'Verifier Console'}
-              </div>
-              <div className="text-xs font-bold text-zinc-900 mt-1 truncate">
-                {currentUser.institutionName || (isAicte ? 'AICTE Central HQ, New Delhi' : isVerifier ? 'TCS Background Services' : 'Student Identity Desk')}
-              </div>
-            </div>
-
-            <nav className="space-y-1">
-              {currentNav.map((item) => {
-                const isActive = pathname === item.href;
-                const IconComponent = item.icon;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${
-                      isActive
-                        ? 'bg-zinc-900 text-white font-semibold shadow-sm'
-                        : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <IconComponent className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-zinc-500'}`} />
-                      <span>{item.label}</span>
-                    </div>
-                    {item.badge && (
-                      <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Quick Context Card */}
-            <div className="p-3.5 rounded-2xl bg-zinc-50 border border-zinc-100 text-[11px] text-zinc-600">
-              <div className="flex items-center gap-2 font-semibold text-zinc-900 mb-1">
-                <Shield className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Zero Trust Active</span>
-              </div>
-              <p className="text-[10px] text-zinc-500 leading-relaxed">
-                Masked APAAR by default. Cryptographic audit hashing enabled.
-              </p>
-            </div>
-          </aside>
-        )}
-
-        {/* Content Area */}
-        <main className="flex-1 min-w-0">
+      {isHomePage ? (
+        <main className="flex-1 w-full min-w-0">
           {children}
         </main>
-      </div>
+      ) : (
+        <div className="flex-1 flex flex-col lg:flex-row max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 gap-6">
+          {/* Workspace Sidebar (when inside a portal) */}
+          {!isPublic && currentNav.length > 0 && (
+            <aside className="w-full lg:w-64 once-card rounded-3xl p-5 flex-shrink-0 space-y-5 h-fit lg:sticky lg:top-20">
+              <div className="pb-3 border-b border-zinc-100">
+                <div className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">
+                  {isInstitution ? 'Institution Workspace' : isAicte ? 'Regulation Bureau' : isStudent ? 'Citizen Workspace' : 'Verifier Console'}
+                </div>
+                <div className="text-xs font-bold text-zinc-900 mt-1 truncate">
+                  {currentUser.institutionName || (isAicte ? 'AICTE Central HQ, New Delhi' : isVerifier ? 'TCS Background Services' : 'Student Identity Desk')}
+                </div>
+              </div>
+
+              <nav className="space-y-1">
+                {currentNav.map((item) => {
+                  const isActive = pathname === item.href;
+                  const IconComponent = item.icon;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${
+                        isActive
+                          ? 'bg-zinc-900 text-white font-semibold shadow-sm'
+                          : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <IconComponent className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-zinc-500'}`} />
+                        <span>{item.label}</span>
+                      </div>
+                      {item.badge && (
+                        <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </nav>
+
+              {/* Quick Context Card */}
+              <div className="p-3.5 rounded-2xl bg-zinc-50 border border-zinc-100 text-[11px] text-zinc-600">
+                <div className="flex items-center gap-2 font-semibold text-zinc-900 mb-1">
+                  <Shield className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Zero Trust Active</span>
+                </div>
+                <p className="text-[10px] text-zinc-500 leading-relaxed">
+                  Masked APAAR by default. Cryptographic audit hashing enabled.
+                </p>
+              </div>
+            </aside>
+          )}
+
+          {/* Content Area */}
+          <main className="flex-1 min-w-0">
+            {children}
+          </main>
+        </div>
+      )}
 
       {/* Persistent Toast notification */}
       {resetSuccessToast && (
