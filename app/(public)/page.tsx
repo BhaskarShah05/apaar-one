@@ -33,8 +33,7 @@ import {
   ExternalLink,
   Shield,
   Check,
-  Code2,
-  Fingerprint
+  Code2
 } from 'lucide-react';
 
 // Brand Partners for Once UI Marquee
@@ -51,8 +50,8 @@ const INSTITUTION_PARTNERS = [
 
 const StatItem = ({ value, label }: { value: string; label: string }) => (
   <div className="flex flex-col items-center justify-center transition-transform hover:-translate-y-1 cursor-default">
-    <span className="text-xl font-bold text-white sm:text-2xl">{value}</span>
-    <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-medium sm:text-xs">{label}</span>
+    <span className="text-xl font-extrabold text-zinc-900 sm:text-2xl">{value}</span>
+    <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold sm:text-xs">{label}</span>
   </div>
 );
 
@@ -187,40 +186,40 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="w-full space-y-16 py-6 font-sans">
+    <div className="w-full space-y-16 py-6 font-sans text-zinc-900">
       
-      {/* --- HERO SECTION (ONCE UI MAGIC PORTFOLIO STYLE) --- */}
-      <section className="relative overflow-hidden rounded-3xl once-card p-8 sm:p-14 lg:p-16">
+      {/* --- HERO SECTION (ONCE UI WHITE THEME) --- */}
+      <section className="relative overflow-hidden rounded-3xl once-card p-8 sm:p-14 lg:p-16 border border-zinc-200/90 shadow-sm">
         
-        {/* Atmospheric Ambient Glow */}
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-72 w-72 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
+        {/* Subtle Atmospheric Glow Orbs */}
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 h-72 w-72 rounded-full bg-blue-500/5 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-72 w-72 rounded-full bg-amber-500/5 blur-3xl pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
           
-          {/* Left Column: Once UI Typography & CTA */}
+          {/* Left Column */}
           <div className="lg:col-span-7 space-y-6">
             
-            {/* Once UI Featured Pill Badge with Hairline Divider */}
-            <div className="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 once-dock text-xs font-medium text-zinc-300">
-              <span className="font-semibold text-white">AICTE Bureau</span>
-              <div className="w-px h-3.5 bg-white/20" />
-              <span className="text-[#ffcd75] flex items-center gap-1.5">
-                <Star className="w-3 h-3 fill-current" />
+            {/* Once UI Featured Pill Badge */}
+            <div className="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 once-dock text-xs font-medium text-zinc-700">
+              <span className="font-bold text-zinc-950">AICTE Bureau</span>
+              <div className="w-px h-3.5 bg-zinc-300" />
+              <span className="text-amber-700 font-semibold flex items-center gap-1.5">
+                <Star className="w-3 h-3 fill-current text-amber-500" />
                 One Academic Identity
               </span>
             </div>
 
             {/* Display Headline */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05]">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-zinc-950 leading-[1.05]">
               One Academic Identity.<br />
-              <span className="bg-gradient-to-r from-white via-white to-[#ffcd75] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-zinc-950 via-zinc-800 to-amber-700 bg-clip-text text-transparent">
                 Every Enrolment Verified.
               </span>
             </h1>
 
             {/* Subline */}
-            <p className="max-w-xl text-base sm:text-lg text-zinc-400 leading-relaxed">
+            <p className="max-w-xl text-base sm:text-lg text-zinc-600 leading-relaxed font-normal">
               Unified student enrolment management, APAAR registry reconciliation, and policy-as-code seat compliance for AICTE-approved institutions across India.
             </p>
 
@@ -228,7 +227,7 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
                 href="#interactive-sandbox"
-                className="px-7 py-3.5 rounded-full bg-white text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 shadow-xl"
+                className="px-7 py-3.5 rounded-full bg-zinc-950 text-white font-semibold text-xs sm:text-sm hover:bg-zinc-800 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 shadow-md"
               >
                 Launch Verification Sandbox
                 <ArrowRight className="w-4 h-4" />
@@ -236,32 +235,32 @@ export default function HomePage() {
 
               <Link
                 href="/sign-in"
-                className="px-7 py-3.5 rounded-full once-dock text-white font-medium text-xs sm:text-sm hover:border-white/25 transition-all flex items-center gap-2"
+                className="px-7 py-3.5 rounded-full once-dock text-zinc-800 font-semibold text-xs sm:text-sm hover:border-zinc-400 transition-all flex items-center gap-2 shadow-sm"
               >
-                <Play className="w-3.5 h-3.5 fill-current text-[#ffcd75]" />
+                <Play className="w-3.5 h-3.5 fill-current text-amber-600" />
                 Explore 7 Personas
               </Link>
             </div>
           </div>
 
-          {/* Right Column: Once UI Bento Stats & Marquee */}
+          {/* Right Column: Bento Stats & Marquee */}
           <div className="lg:col-span-5 space-y-5">
             
             {/* Stats Card */}
-            <div className="p-6 sm:p-7 rounded-2xl bg-zinc-900/80 border border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-xl">
+            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm relative overflow-hidden">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white">
-                    <Target className="w-5 h-5 text-[#ffcd75]" />
+                  <div className="w-10 h-10 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-900">
+                    <Target className="w-5 h-5 text-amber-600" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-white">12,840+</div>
-                    <div className="text-xs text-zinc-400">Approved Institutions</div>
+                    <div className="text-2xl font-extrabold text-zinc-950">12,840+</div>
+                    <div className="text-xs text-zinc-500 font-medium">Approved Institutions</div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 text-[10px] font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-bold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   LIVE TELEMETRY
                 </div>
               </div>
@@ -269,27 +268,27 @@ export default function HomePage() {
               {/* Progress Bar */}
               <div className="space-y-2 mb-6">
                 <div className="flex justify-between text-xs">
-                  <span className="text-zinc-400">National Verification Rate</span>
-                  <span className="text-white font-medium">99.4%</span>
+                  <span className="text-zinc-500 font-medium">National Verification Rate</span>
+                  <span className="text-zinc-950 font-bold">99.4%</span>
                 </div>
-                <div className="h-2 w-full rounded-full bg-zinc-800 overflow-hidden">
-                  <div className="h-full w-[99.4%] rounded-full bg-gradient-to-r from-cyan-400 to-[#ffcd75]" />
+                <div className="h-2 w-full rounded-full bg-zinc-100 overflow-hidden border border-zinc-200/60">
+                  <div className="h-full w-[99.4%] rounded-full bg-gradient-to-r from-blue-600 to-amber-500" />
                 </div>
               </div>
 
               {/* Mini Stats Grid */}
-              <div className="grid grid-cols-3 gap-2 text-center pt-4 border-t border-white/10">
+              <div className="grid grid-cols-3 gap-2 text-center pt-4 border-t border-zinc-100">
                 <StatItem value="1.42M+" label="Students" />
-                <div className="w-px h-full bg-white/10 mx-auto" />
+                <div className="w-px h-full bg-zinc-200 mx-auto" />
                 <StatItem value="0.02%" label="Duplicates" />
-                <div className="w-px h-full bg-white/10 mx-auto" />
+                <div className="w-px h-full bg-zinc-200 mx-auto" />
                 <StatItem value="100%" label="Audited" />
               </div>
             </div>
 
             {/* Marquee Card */}
-            <div className="p-5 rounded-2xl bg-zinc-900/60 border border-white/10 overflow-hidden backdrop-blur-xl">
-              <div className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider mb-3">
+            <div className="p-5 rounded-3xl bg-white border border-zinc-200/90 shadow-sm overflow-hidden">
+              <div className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider mb-3">
                 Connected Accredited Institutions & Identity Networks
               </div>
 
@@ -304,12 +303,10 @@ export default function HomePage() {
                   {[...INSTITUTION_PARTNERS, ...INSTITUTION_PARTNERS, ...INSTITUTION_PARTNERS].map((inst, i) => (
                     <div 
                       key={i}
-                      className="flex items-center gap-2 opacity-60 transition-all hover:opacity-100 hover:scale-105 cursor-default"
+                      className="flex items-center gap-2 text-zinc-700 transition-all hover:text-zinc-950 hover:scale-105 cursor-default font-semibold text-xs"
                     >
-                      <inst.icon className="h-4 w-4 text-[#ffcd75]" />
-                      <span className="text-xs font-semibold text-white tracking-tight">
-                        {inst.name}
-                      </span>
+                      <inst.icon className="h-4 w-4 text-amber-600" />
+                      <span>{inst.name}</span>
                     </div>
                   ))}
                 </div>
@@ -322,17 +319,17 @@ export default function HomePage() {
       </section>
 
       {/* --- SECTION 2: LIVE INTERACTIVE APAAR VERIFICATION SANDBOX --- */}
-      <section id="interactive-sandbox" className="rounded-3xl once-card p-6 sm:p-10 lg:p-12 space-y-8">
+      <section id="interactive-sandbox" className="rounded-3xl once-card p-6 sm:p-10 lg:p-12 space-y-8 border border-zinc-200/90 shadow-sm">
         
         <div className="max-w-3xl space-y-2">
-          <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 once-dock text-xs font-semibold text-amber-300">
-            <Sparkles className="w-3.5 h-3.5 text-[#ffcd75]" />
+          <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 once-dock text-xs font-bold text-amber-800">
+            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
             <span>Interactive Verification Sandbox</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950">
             Instant Academic Reference Verification
           </h2>
-          <p className="text-zinc-400 text-xs sm:text-sm">
+          <p className="text-zinc-600 text-xs sm:text-sm">
             Select one of the pre-seeded PRD test cases to observe real-time cryptographic validation, quota classification, and tamper-evident token issuance.
           </p>
         </div>
@@ -343,10 +340,10 @@ export default function HomePage() {
             <button
               key={idx}
               onClick={() => handleSelectScenario(sc)}
-              className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
+              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
                 testApaar === sc.apaar
-                  ? 'bg-white text-zinc-950 font-semibold shadow-md scale-105'
-                  : 'once-dock text-zinc-300 hover:text-white'
+                  ? 'bg-zinc-950 text-white shadow-md scale-105'
+                  : 'bg-white border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50'
               }`}
             >
               {sc.label}
@@ -355,37 +352,37 @@ export default function HomePage() {
         </div>
 
         {/* Interactive Result Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-black/40 border border-white/10 rounded-2xl p-6 sm:p-8 backdrop-blur-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-zinc-50/80 border border-zinc-200/90 rounded-2xl p-6 sm:p-8">
           
           {/* Left: Validation Details */}
           <div className="lg:col-span-8 space-y-5">
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-zinc-200">
               <div>
-                <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">Candidate Name</span>
-                <div className="text-xl font-bold text-white flex items-center gap-2">
+                <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Candidate Name</span>
+                <div className="text-xl font-extrabold text-zinc-950 flex items-center gap-2">
                   {simulatedResult.name}
                   {simulatedResult.status === 'ACTIVE_VERIFIED' && (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   )}
                 </div>
               </div>
 
               <div>
-                <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">APAAR ID</span>
-                <div className="text-sm font-mono text-[#ffcd75] font-semibold">
+                <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold">APAAR ID</span>
+                <div className="text-sm font-mono text-zinc-900 font-bold bg-white px-2.5 py-1 rounded-full border border-zinc-200">
                   {simulatedResult.apaar}
                 </div>
               </div>
 
               <div>
-                <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">Validation Status</span>
+                <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-bold">Validation Status</span>
                 <div className="mt-1">
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${
+                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
                     simulatedResult.status === 'ACTIVE_VERIFIED' 
-                      ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30'
+                      ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
                       : simulatedResult.status === 'OVER_CAPACITY'
-                      ? 'bg-rose-500/10 text-rose-300 border-rose-500/30'
-                      : 'bg-amber-500/10 text-amber-300 border-amber-500/30'
+                      ? 'bg-rose-50 text-rose-800 border-rose-200'
+                      : 'bg-amber-50 text-amber-800 border-amber-200'
                   }`}>
                     <span className="w-1.5 h-1.5 rounded-full bg-current" />
                     {simulatedResult.status.replace(/_/g, ' ')}
@@ -397,50 +394,50 @@ export default function HomePage() {
             {/* Details Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               <div>
-                <span className="text-zinc-500">Institution:</span>
-                <p className="font-medium text-zinc-200 mt-0.5">{simulatedResult.institution}</p>
+                <span className="text-zinc-500 font-medium">Institution:</span>
+                <p className="font-semibold text-zinc-900 mt-0.5">{simulatedResult.institution}</p>
               </div>
               <div>
-                <span className="text-zinc-500">Academic Programme:</span>
-                <p className="font-medium text-zinc-200 mt-0.5">{simulatedResult.programme}</p>
+                <span className="text-zinc-500 font-medium">Academic Programme:</span>
+                <p className="font-semibold text-zinc-900 mt-0.5">{simulatedResult.programme}</p>
               </div>
               <div>
-                <span className="text-zinc-500">AICTE Regulatory Quota:</span>
-                <p className="font-medium text-amber-300 mt-0.5">{simulatedResult.quota}</p>
+                <span className="text-zinc-500 font-medium">AICTE Regulatory Quota:</span>
+                <p className="font-semibold text-amber-800 mt-0.5">{simulatedResult.quota}</p>
               </div>
               <div>
-                <span className="text-zinc-500">Risk Assessment:</span>
-                <p className="font-medium text-zinc-200 mt-0.5">{simulatedResult.riskLevel}</p>
+                <span className="text-zinc-500 font-medium">Risk Assessment:</span>
+                <p className="font-semibold text-zinc-900 mt-0.5">{simulatedResult.riskLevel}</p>
               </div>
             </div>
 
             {/* Cryptographic Token */}
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-4">
+            <div className="pt-4 border-t border-zinc-200 flex items-center justify-between gap-4">
               <div className="truncate">
-                <span className="text-[10px] text-zinc-500 uppercase tracking-wider">Opaque Verification Token:</span>
-                <div className="font-mono text-xs text-zinc-400 truncate">{simulatedResult.token}</div>
+                <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Opaque Verification Token:</span>
+                <div className="font-mono text-xs text-zinc-700 truncate">{simulatedResult.token}</div>
               </div>
 
               <button
                 onClick={handleCopyToken}
-                className="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-medium text-white flex items-center gap-1.5 transition-colors flex-shrink-0"
+                className="px-3 py-1.5 rounded-full bg-white hover:bg-zinc-100 text-xs font-semibold text-zinc-900 border border-zinc-200 flex items-center gap-1.5 transition-colors flex-shrink-0 shadow-sm"
               >
-                {copiedToken ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                {copiedToken ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copiedToken ? 'Copied' : 'Copy Token'}</span>
               </button>
             </div>
           </div>
 
           {/* Right: QR Token Scanner */}
-          <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-            <div className="p-3 bg-white rounded-2xl shadow-xl mb-3">
+          <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-white border border-zinc-200 text-center shadow-sm">
+            <div className="p-3 bg-zinc-50 rounded-2xl border border-zinc-200 mb-3">
               <QrCode className="w-24 h-24 text-zinc-950" />
             </div>
-            <span className="text-[11px] font-semibold text-white">Signed QR Reference</span>
-            <span className="text-[10px] text-zinc-400 mt-0.5">Tamper-evident • Zero PII</span>
+            <span className="text-[11px] font-bold text-zinc-900">Signed QR Reference</span>
+            <span className="text-[10px] text-zinc-500 mt-0.5">Tamper-evident • Zero PII</span>
             <Link
               href={`/verifier/scan?token=${simulatedResult.token}`}
-              className="mt-4 px-4 py-1.5 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 text-xs font-semibold transition-all hover:scale-105"
+              className="mt-4 px-4 py-1.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-semibold transition-all hover:scale-105 shadow-sm"
             >
               Inspect in Verifier Portal →
             </Link>
@@ -450,20 +447,20 @@ export default function HomePage() {
       </section>
 
       {/* --- SECTION 3: POLICY-AS-CODE SEAT CAPACITY SIMULATOR --- */}
-      <section className="rounded-3xl once-card p-6 sm:p-10 lg:p-12 space-y-8">
+      <section className="rounded-3xl once-card p-6 sm:p-10 lg:p-12 space-y-8 border border-zinc-200/90 shadow-sm">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Controls Column */}
           <div className="lg:col-span-6 space-y-6">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 once-dock text-xs font-semibold text-zinc-300 mb-3">
-                <Scale className="w-3.5 h-3.5 text-[#ffcd75]" />
+              <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 once-dock text-xs font-bold text-zinc-800 mb-3">
+                <Scale className="w-3.5 h-3.5 text-amber-600" />
                 Rule-as-Code Engine (APH 2024-27)
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950">
                 Live Seat Capacity & Supernumerary Simulator
               </h2>
-              <p className="text-zinc-400 text-xs sm:text-sm mt-1">
+              <p className="text-zinc-600 text-xs sm:text-sm mt-1">
                 Drag the sliders to see how AICTE Clause 4.2 dynamically verifies regular intake separately from 5% TFW and 10% Lateral Entry supernumerary quotas.
               </p>
             </div>
@@ -471,9 +468,9 @@ export default function HomePage() {
             {/* Sliders */}
             <div className="space-y-4 pt-2">
               <div>
-                <div className="flex justify-between text-xs font-medium mb-1.5">
-                  <span className="text-zinc-400">Approved Regular Intake:</span>
-                  <span className="text-white font-bold">{approvedIntake} seats</span>
+                <div className="flex justify-between text-xs font-semibold mb-1.5">
+                  <span className="text-zinc-600">Approved Regular Intake:</span>
+                  <span className="text-zinc-950 font-extrabold">{approvedIntake} seats</span>
                 </div>
                 <input
                   type="range"
@@ -482,14 +479,14 @@ export default function HomePage() {
                   step="30"
                   value={approvedIntake}
                   onChange={(e) => setApprovedIntake(Number(e.target.value))}
-                  className="w-full accent-[#ffcd75] cursor-pointer"
+                  className="w-full accent-zinc-950 cursor-pointer"
                 />
               </div>
 
               <div>
-                <div className="flex justify-between text-xs font-medium mb-1.5">
-                  <span className="text-zinc-400">Actual Regular Enrolment:</span>
-                  <span className={`font-bold ${isRegularExceeded ? 'text-rose-400' : 'text-white'}`}>
+                <div className="flex justify-between text-xs font-semibold mb-1.5">
+                  <span className="text-zinc-600">Actual Regular Enrolment:</span>
+                  <span className={`font-extrabold ${isRegularExceeded ? 'text-rose-600' : 'text-zinc-950'}`}>
                     {regularEnrolled} seats {isRegularExceeded && '(BREACH)'}
                   </span>
                 </div>
@@ -499,15 +496,15 @@ export default function HomePage() {
                   max={approvedIntake + 30}
                   value={regularEnrolled}
                   onChange={(e) => setRegularEnrolled(Number(e.target.value))}
-                  className="w-full accent-blue-500 cursor-pointer"
+                  className="w-full accent-blue-600 cursor-pointer"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4 pt-2">
                 <div>
-                  <div className="flex justify-between text-[11px] mb-1">
-                    <span className="text-zinc-400">5% TFW Quota:</span>
-                    <span className={`font-semibold ${isTfwExceeded ? 'text-rose-400' : 'text-emerald-300'}`}>
+                  <div className="flex justify-between text-[11px] font-semibold mb-1">
+                    <span className="text-zinc-600">5% TFW Quota:</span>
+                    <span className={isTfwExceeded ? 'text-rose-600' : 'text-emerald-700'}>
                       {tfwEnrolled} / {maxTfw}
                     </span>
                   </div>
@@ -517,14 +514,14 @@ export default function HomePage() {
                     max={maxTfw + 5}
                     value={tfwEnrolled}
                     onChange={(e) => setTfwEnrolled(Number(e.target.value))}
-                    className="w-full accent-emerald-400 cursor-pointer"
+                    className="w-full accent-emerald-600 cursor-pointer"
                   />
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-[11px] mb-1">
-                    <span className="text-zinc-400">10% Lateral Entry:</span>
-                    <span className={`font-semibold ${isLeExceeded ? 'text-rose-400' : 'text-purple-300'}`}>
+                  <div className="flex justify-between text-[11px] font-semibold mb-1">
+                    <span className="text-zinc-600">10% Lateral Entry:</span>
+                    <span className={isLeExceeded ? 'text-rose-600' : 'text-purple-700'}>
                       {leEnrolled} / {maxLe}
                     </span>
                   </div>
@@ -534,7 +531,7 @@ export default function HomePage() {
                     max={maxLe + 8}
                     value={leEnrolled}
                     onChange={(e) => setLeEnrolled(Number(e.target.value))}
-                    className="w-full accent-purple-400 cursor-pointer"
+                    className="w-full accent-purple-600 cursor-pointer"
                   />
                 </div>
               </div>
@@ -542,15 +539,15 @@ export default function HomePage() {
           </div>
 
           {/* Mathematical Proof Card */}
-          <div className="lg:col-span-6 p-6 sm:p-7 rounded-2xl bg-black/50 border border-white/10 backdrop-blur-xl">
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
-              <span className="text-xs uppercase tracking-wider text-zinc-400 font-semibold">
+          <div className="lg:col-span-6 p-6 sm:p-7 rounded-2xl bg-zinc-50 border border-zinc-200">
+            <div className="flex items-center justify-between pb-4 border-b border-zinc-200">
+              <span className="text-xs uppercase tracking-wider text-zinc-500 font-bold">
                 Mathematical Verification Ledger
               </span>
               <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${
                 isOverallViolated 
-                  ? 'bg-rose-500/10 text-rose-300 border-rose-500/30'
-                  : 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30'
+                  ? 'bg-rose-50 text-rose-800 border-rose-200'
+                  : 'bg-emerald-50 text-emerald-800 border-emerald-200'
               }`}>
                 {isOverallViolated ? 'REGULATORY NON-COMPLIANCE' : 'COMPLIANT WITH APH 2024'}
               </span>
@@ -558,51 +555,51 @@ export default function HomePage() {
 
             <div className="py-6 space-y-4">
               <div className="flex justify-between items-center text-xs">
-                <span className="text-zinc-400">Regular Sanction Utilization:</span>
-                <span className="font-mono font-bold text-white">
+                <span className="text-zinc-600 font-medium">Regular Sanction Utilization:</span>
+                <span className="font-mono font-bold text-zinc-950">
                   {regularEnrolled} / {approvedIntake} ({( (regularEnrolled / approvedIntake) * 100 ).toFixed(1)}%)
                 </span>
               </div>
 
               <div className="flex justify-between items-center text-xs">
-                <span className="text-zinc-400">Total Sanction + Supernumerary Cap:</span>
-                <span className="font-mono font-bold text-white">
+                <span className="text-zinc-600 font-medium">Total Sanction + Supernumerary Cap:</span>
+                <span className="font-mono font-bold text-zinc-950">
                   {totalStudentsEnrolled} / {totalCapacityPermitted} seats
                 </span>
               </div>
 
               {/* Progress bar */}
-              <div className="h-2 w-full rounded-full bg-zinc-800 overflow-hidden">
+              <div className="h-2 w-full rounded-full bg-zinc-200 overflow-hidden">
                 <div 
-                  className={`h-full transition-all duration-300 ${isOverallViolated ? 'bg-rose-500' : 'bg-gradient-to-r from-emerald-400 to-[#ffcd75]'}`}
+                  className={`h-full transition-all duration-300 ${isOverallViolated ? 'bg-rose-600' : 'bg-gradient-to-r from-emerald-500 to-amber-500'}`}
                   style={{ width: `${Math.min(100, (totalStudentsEnrolled / totalCapacityPermitted) * 100)}%` }}
                 />
               </div>
 
               {/* Dynamic Warning Notice */}
               {isOverallViolated ? (
-                <div className="p-3 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs flex items-start gap-2.5">
-                  <AlertTriangle className="w-4 h-4 flex-shrink-0 text-rose-400 mt-0.5" />
+                <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2.5">
+                  <AlertTriangle className="w-4 h-4 flex-shrink-0 text-rose-600 mt-0.5" />
                   <div>
-                    <span className="font-semibold block">Regulatory Breach Detected</span>
+                    <span className="font-bold block">Regulatory Breach Detected</span>
                     <span>Institutions exceeding sanctioned intake cannot absorb extra students into supernumerary quotas.</span>
                   </div>
                 </div>
               ) : (
-                <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-emerald-400 mt-0.5" />
+                <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-emerald-600 mt-0.5" />
                   <div>
-                    <span className="font-semibold block">Arithmetic Proof Validated</span>
+                    <span className="font-bold block">Arithmetic Proof Validated</span>
                     <span>All enrolments cleanly segregated under AICTE Approval Process Handbook Clauses 4.2 & 4.4.</span>
                   </div>
                 </div>
               )}
             </div>
 
-            <div className="pt-4 border-t border-white/10 flex justify-end">
+            <div className="pt-4 border-t border-zinc-200 flex justify-end">
               <Link
                 href="/institution/intake"
-                className="text-xs text-[#ffcd75] hover:text-white font-medium flex items-center gap-1 transition-colors"
+                className="text-xs text-blue-600 hover:text-blue-800 font-bold flex items-center gap-1 transition-colors"
               >
                 Inspect Institution Seat Matrix →
               </Link>
@@ -613,16 +610,16 @@ export default function HomePage() {
       </section>
 
       {/* --- SECTION 4: 5-STAGE WORKFLOW ENGINE (INTERACTIVE INSPECTOR) --- */}
-      <section className="rounded-3xl once-card p-6 sm:p-10 lg:p-12 space-y-8">
+      <section className="rounded-3xl once-card p-6 sm:p-10 lg:p-12 space-y-8 border border-zinc-200/90 shadow-sm">
         <div className="text-center max-w-2xl mx-auto space-y-2">
-          <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 once-dock text-xs font-semibold text-zinc-300">
-            <Cpu className="w-3.5 h-3.5 text-[#ffcd75]" />
+          <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 once-dock text-xs font-bold text-zinc-700">
+            <Cpu className="w-3.5 h-3.5 text-amber-600" />
             Continuous Verification Lifecycle
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950">
             How APAAR ONE Works
           </h2>
-          <p className="text-zinc-400 text-xs sm:text-sm">
+          <p className="text-zinc-600 text-xs sm:text-sm">
             Click through the five stages of the regulatory pipeline to inspect real live system payloads.
           </p>
         </div>
@@ -633,10 +630,10 @@ export default function HomePage() {
             <button
               key={idx}
               onClick={() => setActiveWorkflowTab(idx)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+              className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
                 activeWorkflowTab === idx
-                  ? 'bg-white text-zinc-950 shadow-xl scale-105'
-                  : 'once-dock text-zinc-400 hover:text-white'
+                  ? 'bg-zinc-950 text-white shadow-md scale-105'
+                  : 'bg-white border border-zinc-200 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50'
               }`}
             >
               {step.title}
@@ -645,22 +642,22 @@ export default function HomePage() {
         </div>
 
         {/* Workflow Active Stage Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-black/40 border border-white/10 rounded-2xl p-6 sm:p-8 backdrop-blur-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-zinc-50 border border-zinc-200 rounded-2xl p-6 sm:p-8">
           <div className="lg:col-span-5 space-y-4">
-            <span className="text-[10px] uppercase font-bold tracking-wider text-amber-400">
+            <span className="text-[10px] uppercase font-extrabold tracking-wider text-amber-700">
               System Actor: {workflowSteps[activeWorkflowTab].actor}
             </span>
-            <h3 className="text-xl sm:text-2xl font-bold text-white">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-zinc-950">
               {workflowSteps[activeWorkflowTab].title}
             </h3>
-            <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+            <p className="text-zinc-600 text-xs sm:text-sm leading-relaxed">
               {workflowSteps[activeWorkflowTab].summary}
             </p>
 
             <div className="pt-2">
               <Link
                 href="/how-it-works"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-white hover:text-[#ffcd75] transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold text-zinc-900 hover:text-blue-600 transition-colors"
               >
                 Read Architectural Specification
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -669,10 +666,10 @@ export default function HomePage() {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="rounded-2xl bg-zinc-950 border border-white/10 p-5 font-mono text-xs overflow-x-auto shadow-2xl">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3 text-zinc-500 text-[10px]">
+            <div className="rounded-2xl bg-zinc-950 border border-zinc-800 p-5 font-mono text-xs overflow-x-auto shadow-xl text-white">
+              <div className="flex items-center justify-between pb-3 border-b border-zinc-800 mb-3 text-zinc-500 text-[10px]">
                 <span>PAYLOAD INSPECTOR • REST API v1</span>
-                <span className="text-emerald-400">200 OK</span>
+                <span className="text-emerald-400 font-bold">200 OK</span>
               </div>
               <pre className="text-zinc-300 leading-relaxed font-mono">
                 {workflowSteps[activeWorkflowTab].codeSnippet}
@@ -685,10 +682,10 @@ export default function HomePage() {
       {/* --- SECTION 5: 4 INTERCONNECTED PORTALS LAUNCHPAD --- */}
       <section className="space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950">
             Unified Multi-Stakeholder Ecosystem
           </h2>
-          <p className="text-zinc-400 text-xs sm:text-sm">
+          <p className="text-zinc-600 text-xs sm:text-sm">
             One platform sharing the same database, policy engine, and design system.
           </p>
         </div>
@@ -696,21 +693,21 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {/* Card 1: Institution */}
-          <div className="rounded-3xl once-card p-6 flex flex-col justify-between">
+          <div className="rounded-3xl once-card p-6 flex flex-col justify-between border border-zinc-200/90 shadow-sm">
             <div>
-              <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-4">
-                <Building2 className="w-5 h-5 text-[#ffcd75]" />
+              <div className="w-10 h-10 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-900 mb-4">
+                <Building2 className="w-5 h-5 text-amber-600" />
               </div>
-              <h3 className="text-base font-bold text-white">Institutions</h3>
-              <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
+              <h3 className="text-base font-extrabold text-zinc-950">Institutions</h3>
+              <p className="text-xs text-zinc-600 mt-2 leading-relaxed">
                 Admissions workspace, batch CSV uploads, quota compliance, and validation issue reconciliation.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-white/10">
+            <div className="mt-6 pt-4 border-t border-zinc-100">
               <Link
                 href="/institution/overview"
                 onClick={() => switchUser('INSTITUTION_ADMIN')}
-                className="w-full py-2.5 rounded-full bg-white/10 hover:bg-white text-zinc-200 hover:text-zinc-950 font-semibold text-xs flex items-center justify-center gap-2 transition-all"
+                className="w-full py-2.5 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-sm"
               >
                 Launch Workspace
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -719,21 +716,21 @@ export default function HomePage() {
           </div>
 
           {/* Card 2: AICTE Bureau */}
-          <div className="rounded-3xl once-card p-6 flex flex-col justify-between">
+          <div className="rounded-3xl once-card p-6 flex flex-col justify-between border border-zinc-200/90 shadow-sm">
             <div>
-              <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-4">
-                <Scale className="w-5 h-5 text-amber-400" />
+              <div className="w-10 h-10 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-900 mb-4">
+                <Scale className="w-5 h-5 text-amber-600" />
               </div>
-              <h3 className="text-base font-bold text-white">AICTE Bureau</h3>
-              <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
+              <h3 className="text-base font-extrabold text-zinc-950">AICTE Bureau</h3>
+              <p className="text-xs text-zinc-600 mt-2 leading-relaxed">
                 National enrolment intelligence, cross-state duplicate triage, policy-as-code authoring, and audit logs.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-white/10">
+            <div className="mt-6 pt-4 border-t border-zinc-100">
               <Link
                 href="/aicte/overview"
                 onClick={() => switchUser('AICTE_REVIEWER')}
-                className="w-full py-2.5 rounded-full bg-white/10 hover:bg-white text-zinc-200 hover:text-zinc-950 font-semibold text-xs flex items-center justify-center gap-2 transition-all"
+                className="w-full py-2.5 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-sm"
               >
                 Launch Console
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -742,21 +739,21 @@ export default function HomePage() {
           </div>
 
           {/* Card 3: Student Portal */}
-          <div className="rounded-3xl once-card p-6 flex flex-col justify-between">
+          <div className="rounded-3xl once-card p-6 flex flex-col justify-between border border-zinc-200/90 shadow-sm">
             <div>
-              <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-4">
-                <Users className="w-5 h-5 text-emerald-400" />
+              <div className="w-10 h-10 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-900 mb-4">
+                <Users className="w-5 h-5 text-emerald-600" />
               </div>
-              <h3 className="text-base font-bold text-white">Student Portal</h3>
-              <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
+              <h3 className="text-base font-extrabold text-zinc-950">Student Portal</h3>
+              <p className="text-xs text-zinc-600 mt-2 leading-relaxed">
                 Digital APAAR identity card, verified enrolment timeline, 1-click consent gate, and data sharing logs.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-white/10">
+            <div className="mt-6 pt-4 border-t border-zinc-100">
               <Link
                 href="/student/overview"
                 onClick={() => switchUser('STUDENT')}
-                className="w-full py-2.5 rounded-full bg-white/10 hover:bg-white text-zinc-200 hover:text-zinc-950 font-semibold text-xs flex items-center justify-center gap-2 transition-all"
+                className="w-full py-2.5 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-sm"
               >
                 Launch Portal
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -765,21 +762,21 @@ export default function HomePage() {
           </div>
 
           {/* Card 4: External Verifier */}
-          <div className="rounded-3xl once-card p-6 flex flex-col justify-between">
+          <div className="rounded-3xl once-card p-6 flex flex-col justify-between border border-zinc-200/90 shadow-sm">
             <div>
-              <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-4">
-                <Search className="w-5 h-5 text-purple-400" />
+              <div className="w-10 h-10 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-900 mb-4">
+                <Search className="w-5 h-5 text-purple-600" />
               </div>
-              <h3 className="text-base font-bold text-white">External Verifier</h3>
-              <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
+              <h3 className="text-base font-extrabold text-zinc-950">External Verifier</h3>
+              <p className="text-xs text-zinc-600 mt-2 leading-relaxed">
                 Background verification engine, bulk student queries, and instant signed QR token scanner.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-white/10">
+            <div className="mt-6 pt-4 border-t border-zinc-100">
               <Link
                 href="/verifier/overview"
                 onClick={() => switchUser('EXTERNAL_VERIFIER')}
-                className="w-full py-2.5 rounded-full bg-white/10 hover:bg-white text-zinc-200 hover:text-zinc-950 font-semibold text-xs flex items-center justify-center gap-2 transition-all"
+                className="w-full py-2.5 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-sm"
               >
                 Launch Workspace
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -790,22 +787,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* --- FOOTER IN ONCE UI STYLE --- */}
-      <footer className="pt-12 pb-6 border-t border-white/10 text-xs text-zinc-500">
+      {/* --- FOOTER IN ONCE UI LIGHT STYLE --- */}
+      <footer className="pt-12 pb-6 border-t border-zinc-200 text-xs text-zinc-500">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-zinc-300 font-semibold">All Systems Operational</span>
-            <div className="w-px h-3 bg-white/20 mx-1" />
+          <div className="flex items-center gap-2 font-medium">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-zinc-900 font-bold">All Systems Operational</span>
+            <div className="w-px h-3 bg-zinc-300 mx-1" />
             <span>AICTE Regulation Bureau • SIH Prototype</span>
           </div>
 
           <div className="flex items-center gap-5">
-            <Link href="/about" className="hover:text-white transition-colors">About</Link>
-            <Link href="/how-it-works" className="hover:text-white transition-colors">How It Works</Link>
-            <Link href="/features" className="hover:text-white transition-colors">Features</Link>
-            <Link href="/security-privacy" className="hover:text-white transition-colors">Security & DPDP</Link>
-            <Link href="/help" className="hover:text-white transition-colors">Help Centre</Link>
+            <Link href="/about" className="hover:text-zinc-950 transition-colors font-medium">About</Link>
+            <Link href="/how-it-works" className="hover:text-zinc-950 transition-colors font-medium">How It Works</Link>
+            <Link href="/features" className="hover:text-zinc-950 transition-colors font-medium">Features</Link>
+            <Link href="/security-privacy" className="hover:text-zinc-950 transition-colors font-medium">Security & DPDP</Link>
+            <Link href="/help" className="hover:text-zinc-950 transition-colors font-medium">Help Centre</Link>
           </div>
         </div>
       </footer>

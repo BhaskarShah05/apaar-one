@@ -22,9 +22,9 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
   const norm = status?.toUpperCase() || 'UNKNOWN';
 
   let config = {
-    bg: 'bg-white/5',
-    text: 'text-zinc-300',
-    border: 'border-white/10',
+    bg: 'bg-zinc-100',
+    text: 'text-zinc-700',
+    border: 'border-zinc-200',
     label: status,
     icon: HelpCircle,
   };
@@ -39,9 +39,9 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
     case 'SUCCESS':
     case 'COMPLIANT':
       config = {
-        bg: 'bg-emerald-500/10',
-        text: 'text-emerald-300',
-        border: 'border-emerald-500/20',
+        bg: 'bg-emerald-50',
+        text: 'text-emerald-800',
+        border: 'border-emerald-200',
         label: norm === 'LEGITIMATE_TRANSFER' ? 'Legitimate Transfer' : norm === 'VERIFIED' ? 'Verified' : status,
         icon: ShieldCheck,
       };
@@ -49,9 +49,9 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
 
     case 'ACTIVE':
       config = {
-        bg: 'bg-blue-500/10',
-        text: 'text-blue-300',
-        border: 'border-blue-500/20',
+        bg: 'bg-blue-50',
+        text: 'text-blue-800',
+        border: 'border-blue-200',
         label: 'Active Enrolment',
         icon: CheckCircle2,
       };
@@ -60,9 +60,9 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
     case 'PROVISIONAL':
     case 'FORMAT_VALID':
       config = {
-        bg: 'bg-indigo-500/10',
-        text: 'text-indigo-300',
-        border: 'border-indigo-500/20',
+        bg: 'bg-indigo-50',
+        text: 'text-indigo-800',
+        border: 'border-indigo-200',
         label: norm === 'FORMAT_VALID' ? 'Format Valid (Pending Sync)' : 'Provisional Admission',
         icon: Clock,
       };
@@ -74,9 +74,9 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
     case 'PENDING_STUDENT_CONSENT':
     case 'TRANSFERRED':
       config = {
-        bg: 'bg-amber-500/10',
-        text: 'text-amber-300',
-        border: 'border-amber-500/20',
+        bg: 'bg-amber-50',
+        text: 'text-amber-800',
+        border: 'border-amber-200',
         label: norm === 'PENDING_STUDENT_CONSENT' ? 'Consent Required' : norm === 'UNDER_REVIEW' ? 'Review Case' : status,
         icon: AlertTriangle,
       };
@@ -91,9 +91,9 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
     case 'FAILED':
     case 'EXCEEDED':
       config = {
-        bg: 'bg-rose-500/10',
-        text: 'text-rose-300',
-        border: 'border-rose-500/20',
+        bg: 'bg-rose-50',
+        text: 'text-rose-800',
+        border: 'border-rose-200',
         label: norm === 'OVER_CAPACITY' ? 'Over Capacity' : norm === 'MISMATCH' ? 'Data Mismatch' : status,
         icon: AlertOctagon,
       };
@@ -103,9 +103,9 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
     case 'REVOKED':
     case 'BLOCKED':
       config = {
-        bg: 'bg-zinc-800',
-        text: 'text-zinc-400',
-        border: 'border-white/10',
+        bg: 'bg-zinc-100',
+        text: 'text-zinc-600',
+        border: 'border-zinc-200',
         label: status,
         icon: Ban,
       };
@@ -113,9 +113,9 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
 
     default:
       config = {
-        bg: 'bg-white/5',
-        text: 'text-zinc-300',
-        border: 'border-white/10',
+        bg: 'bg-zinc-100',
+        text: 'text-zinc-700',
+        border: 'border-zinc-200',
         label: status,
         icon: HelpCircle,
       };
@@ -126,7 +126,7 @@ export function StatusBadge({ status, className = '', size = 'md' }: StatusBadge
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 font-medium rounded-full border backdrop-blur-md tracking-wide ${config.bg} ${config.text} ${config.border} ${sizeClasses} ${className}`}
+      className={`inline-flex items-center gap-1.5 font-semibold rounded-full border tracking-wide ${config.bg} ${config.text} ${config.border} ${sizeClasses} ${className}`}
     >
       <IconComponent className={size === 'sm' ? 'w-3 h-3 flex-shrink-0' : 'w-3.5 h-3.5 flex-shrink-0'} />
       <span className="capitalize">{config.label.toLowerCase().replace(/_/g, ' ')}</span>

@@ -44,17 +44,17 @@ export default function HowItWorksPage() {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto py-12 space-y-12 font-sans text-white">
+    <div className="max-w-5xl mx-auto py-12 space-y-12 font-sans text-zinc-900">
       {/* Header */}
       <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-xs font-semibold backdrop-blur-md">
-          <Sparkles className="w-3.5 h-3.5 text-[#ffcd75]" />
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-zinc-700 text-xs font-semibold shadow-sm">
+          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
           <span>System Architecture & Lifecycle</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
-          How <span className="bg-gradient-to-r from-white via-white to-[#ffcd75] bg-clip-text text-transparent">APAAR ONE</span> Works
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950">
+          How <span className="text-zinc-900 underline decoration-amber-400 decoration-wavy underline-offset-8">APAAR ONE</span> Works
         </h1>
-        <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
+        <p className="text-base sm:text-lg text-zinc-600 leading-relaxed">
           From institutional admission filing to cryptographic employer verification, every transaction is audited, privacy-preserved, and mathematically validated.
         </p>
       </div>
@@ -64,33 +64,33 @@ export default function HowItWorksPage() {
         {lifecycleSteps.map((s, idx) => (
           <div
             key={idx}
-            className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur-xl shadow-xl flex flex-col md:flex-row items-start gap-6 hover:border-white/20 transition-all"
+            className="rounded-3xl border border-zinc-200/80 bg-white p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-start gap-6 hover:border-zinc-300 transition-all hover:shadow"
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white font-mono font-bold text-xl flex-shrink-0 border border-white/10">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-900 font-mono font-bold text-xl flex-shrink-0 border border-zinc-200">
               {s.num}
             </div>
             <div className="flex-1 space-y-2">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="text-lg font-bold text-white">{s.title}</h3>
-                <span className="text-[10px] font-semibold text-zinc-400 border border-white/10 px-2.5 py-0.5 rounded-full bg-white/5 uppercase tracking-wider">
+                <h3 className="text-lg font-bold text-zinc-950">{s.title}</h3>
+                <span className="text-[10px] font-semibold text-zinc-600 border border-zinc-200 px-2.5 py-0.5 rounded-full bg-zinc-50 uppercase tracking-wider">
                   {s.badge}
                 </span>
               </div>
-              <p className="text-xs text-amber-300 font-medium">Actor: {s.actor}</p>
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">{s.desc}</p>
+              <p className="text-xs text-amber-700 font-semibold">Actor: {s.actor}</p>
+              <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">{s.desc}</p>
             </div>
           </div>
         ))}
       </div>
 
       {/* Footer Navigation */}
-      <div className="flex justify-between items-center pt-6 border-t border-white/10">
-        <Link href="/about" className="text-xs text-zinc-400 hover:text-white transition-colors">
+      <div className="flex justify-between items-center pt-6 border-t border-zinc-200">
+        <Link href="/about" className="text-xs text-zinc-500 hover:text-zinc-900 transition-colors font-medium">
           ← About APAAR ONE
         </Link>
         <Link 
           href="/features"
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 transition-all hover:scale-105"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-zinc-950 text-white font-semibold text-xs hover:bg-zinc-800 transition-all hover:scale-105 shadow-sm"
         >
           View Feature Capabilities
           <ArrowRight className="w-3.5 h-3.5" />

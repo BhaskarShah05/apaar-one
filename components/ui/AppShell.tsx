@@ -34,7 +34,6 @@ import {
   Sliders,
   HelpCircle,
   Home,
-  Globe,
   Clock,
   Sparkles
 } from 'lucide-react';
@@ -43,7 +42,7 @@ interface AppShellProps {
   children: React.ReactNode;
 }
 
-// Live Time Display component inspired by Once UI Header
+// Live Time Display component inspired by Once UI Header (Light Theme)
 function TimeDisplay() {
   const [timeStr, setTimeStr] = useState('');
 
@@ -68,8 +67,8 @@ function TimeDisplay() {
   if (!timeStr) return null;
 
   return (
-    <div className="flex items-center gap-1.5 font-mono text-[11px] text-zinc-400">
-      <Clock className="w-3.5 h-3.5 text-zinc-500" />
+    <div className="flex items-center gap-1.5 font-mono text-[11px] text-zinc-500">
+      <Clock className="w-3.5 h-3.5 text-zinc-400" />
       <span>{timeStr} IST</span>
     </div>
   );
@@ -179,46 +178,46 @@ export function AppShell({ children }: AppShellProps) {
   const currentNav = isInstitution ? institutionNav : isAicte ? aicteNav : isStudent ? studentNav : isVerifier ? verifierNav : [];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#08080a] font-sans text-zinc-100 selection:bg-cyan-500 selection:text-black once-bg-dots once-spotlight relative">
+    <div className="min-h-screen flex flex-col bg-[#fbfbfd] font-sans text-zinc-900 selection:bg-zinc-900 selection:text-white once-bg-dots once-spotlight relative">
       
-      {/* Once UI Floating Header Island */}
+      {/* Once UI Floating Header Island (Light Mode) */}
       <header className="sticky top-3 z-50 px-4 sm:px-6 max-w-7xl w-full mx-auto">
         <div className="flex items-center justify-between gap-3">
           
           {/* Left: Location & Authority Status Badge */}
           <div className="hidden md:flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-8 h-8 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-[#ffcd75] font-serif font-bold text-sm shadow-md transition-transform group-hover:scale-105">
+              <div className="w-8 h-8 rounded-full bg-zinc-900 text-white flex items-center justify-center font-serif font-bold text-sm shadow-md transition-transform group-hover:scale-105">
                 अ
               </div>
               <div className="flex flex-col">
-                <span className="text-xs font-bold tracking-tight text-white leading-none">APAAR ONE</span>
-                <span className="text-[10px] text-zinc-400 leading-tight flex items-center gap-1.5 mt-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs font-bold tracking-tight text-zinc-900 leading-none">APAAR ONE</span>
+                <span className="text-[10px] text-zinc-500 leading-tight flex items-center gap-1.5 mt-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   New Delhi, IN • AICTE Bureau
                 </span>
               </div>
             </Link>
           </div>
 
-          {/* Center: Once UI Floating Translucent Dock */}
-          <nav className="once-dock rounded-full px-2 py-1.5 flex items-center gap-1 text-xs mx-auto md:mx-0 shadow-2xl">
+          {/* Center: Once UI Floating Translucent Dock (Light Theme) */}
+          <nav className="once-dock rounded-full px-2 py-1.5 flex items-center gap-1 text-xs mx-auto md:mx-0 shadow-lg">
             <Link
               href="/"
               className={`px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-all ${
-                isPublic ? 'bg-white text-zinc-950 font-semibold shadow-sm' : 'text-zinc-400 hover:text-white'
+                isPublic ? 'bg-zinc-950 text-white font-semibold shadow-sm' : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100'
               }`}
             >
               <Home className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Overview</span>
             </Link>
 
-            <div className="w-px h-4 bg-white/15 mx-0.5" />
+            <div className="w-px h-4 bg-zinc-200 mx-0.5" />
 
             <Link
               href="/institution/overview"
               className={`px-3 py-1.5 rounded-full transition-all ${
-                isInstitution ? 'bg-white text-zinc-950 font-semibold shadow-sm' : 'text-zinc-400 hover:text-white'
+                isInstitution ? 'bg-zinc-950 text-white font-semibold shadow-sm' : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100'
               }`}
             >
               Institution
@@ -227,7 +226,7 @@ export function AppShell({ children }: AppShellProps) {
             <Link
               href="/aicte/overview"
               className={`px-3 py-1.5 rounded-full transition-all ${
-                isAicte ? 'bg-white text-zinc-950 font-semibold shadow-sm' : 'text-zinc-400 hover:text-white'
+                isAicte ? 'bg-zinc-950 text-white font-semibold shadow-sm' : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100'
               }`}
             >
               AICTE Bureau
@@ -236,7 +235,7 @@ export function AppShell({ children }: AppShellProps) {
             <Link
               href="/student/overview"
               className={`px-3 py-1.5 rounded-full transition-all ${
-                isStudent ? 'bg-white text-zinc-950 font-semibold shadow-sm' : 'text-zinc-400 hover:text-white'
+                isStudent ? 'bg-zinc-950 text-white font-semibold shadow-sm' : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100'
               }`}
             >
               Student
@@ -245,7 +244,7 @@ export function AppShell({ children }: AppShellProps) {
             <Link
               href="/verifier/overview"
               className={`px-3 py-1.5 rounded-full transition-all ${
-                isVerifier ? 'bg-white text-zinc-950 font-semibold shadow-sm' : 'text-zinc-400 hover:text-white'
+                isVerifier ? 'bg-zinc-950 text-white font-semibold shadow-sm' : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100'
               }`}
             >
               Verifier
@@ -262,22 +261,22 @@ export function AppShell({ children }: AppShellProps) {
             <div className="relative">
               <button
                 onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                className="once-dock px-3 py-1.5 rounded-full text-xs flex items-center gap-2 hover:border-white/20 transition-all text-left"
+                className="once-dock px-3 py-1.5 rounded-full text-xs flex items-center gap-2 hover:border-zinc-300 transition-all text-left"
               >
-                <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-amber-400 to-[#ffcd75] text-zinc-950 font-bold flex items-center justify-center text-[10px]">
+                <div className="w-5 h-5 rounded-full bg-zinc-900 text-white font-bold flex items-center justify-center text-[10px]">
                   {currentUser.name.charAt(0)}
                 </div>
-                <span className="hidden sm:inline text-xs font-medium text-zinc-200">
+                <span className="hidden sm:inline text-xs font-semibold text-zinc-800">
                   {currentUser.name.split(' ')[0]}
                 </span>
-                <ChevronDown className="w-3 h-3 text-zinc-400" />
+                <ChevronDown className="w-3 h-3 text-zinc-500" />
               </button>
 
               {userDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-72 rounded-2xl bg-zinc-900/95 border border-white/15 shadow-2xl p-2 z-50 animate-fade-in backdrop-blur-2xl">
-                  <div className="px-3 py-2 border-b border-white/10 mb-1">
-                    <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                      <Sparkles className="w-3 h-3 text-[#ffcd75]" />
+                <div className="absolute right-0 mt-2 w-72 rounded-2xl bg-white/95 border border-zinc-200/90 shadow-2xl p-2 z-50 animate-fade-in backdrop-blur-2xl">
+                  <div className="px-3 py-2 border-b border-zinc-100 mb-1">
+                    <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
+                      <Sparkles className="w-3 h-3 text-amber-500" />
                       Switch Evaluator Persona
                     </div>
                   </div>
@@ -289,13 +288,13 @@ export function AppShell({ children }: AppShellProps) {
                         onClick={() => handleRoleSwitch(key)}
                         className={`w-full text-left px-3 py-1.5 rounded-xl text-xs flex items-center justify-between transition-colors ${
                           currentUser.id === u.id
-                            ? 'bg-white/15 text-white font-medium border border-white/15'
-                            : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                            ? 'bg-zinc-900 text-white font-medium'
+                            : 'text-zinc-700 hover:bg-zinc-100'
                         }`}
                       >
                         <div>
-                          <div className="font-medium text-white">{u.name}</div>
-                          <div className="text-[10px] text-zinc-400">{u.institutionName || 'AICTE Bureau'}</div>
+                          <div className={`font-semibold ${currentUser.id === u.id ? 'text-white' : 'text-zinc-900'}`}>{u.name}</div>
+                          <div className={`text-[10px] ${currentUser.id === u.id ? 'text-zinc-300' : 'text-zinc-500'}`}>{u.institutionName || 'AICTE Bureau'}</div>
                         </div>
                         {currentUser.id === u.id && (
                           <Check className="w-3.5 h-3.5 text-emerald-400" />
@@ -304,11 +303,11 @@ export function AppShell({ children }: AppShellProps) {
                     ))}
                   </div>
 
-                  <div className="mt-2 pt-2 border-t border-white/10 flex items-center justify-between px-2">
+                  <div className="mt-2 pt-2 border-t border-zinc-100 flex items-center justify-between px-2">
                     <button
                       onClick={handleResetData}
                       disabled={isResetting}
-                      className="text-[11px] text-zinc-400 hover:text-white flex items-center gap-1.5 transition-colors"
+                      className="text-[11px] text-zinc-500 hover:text-zinc-900 flex items-center gap-1.5 transition-colors"
                     >
                       <RotateCcw className={`w-3 h-3 ${isResetting ? 'animate-spin' : ''}`} />
                       <span>{isResetting ? 'Resetting...' : 'Reset Demo State'}</span>
@@ -316,7 +315,7 @@ export function AppShell({ children }: AppShellProps) {
                     <Link
                       href="/sign-in"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="text-[11px] text-[#ffcd75] hover:underline"
+                      className="text-[11px] text-blue-600 hover:underline font-medium"
                     >
                       All Roles →
                     </Link>
@@ -328,7 +327,7 @@ export function AppShell({ children }: AppShellProps) {
             {/* Mobile menu icon */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden once-dock p-2 rounded-full text-zinc-400 hover:text-white"
+              className="md:hidden once-dock p-2 rounded-full text-zinc-600 hover:text-zinc-900"
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
@@ -343,35 +342,35 @@ export function AppShell({ children }: AppShellProps) {
               <Link
                 href="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl bg-white/5 text-white text-center"
+                className="px-3 py-2 rounded-xl bg-zinc-100 text-zinc-900 text-center font-semibold"
               >
                 Public Home
               </Link>
               <Link
                 href="/institution/overview"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl bg-white/5 text-white text-center"
+                className="px-3 py-2 rounded-xl bg-zinc-100 text-zinc-900 text-center font-semibold"
               >
                 Institution
               </Link>
               <Link
                 href="/aicte/overview"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl bg-white/5 text-white text-center"
+                className="px-3 py-2 rounded-xl bg-zinc-100 text-zinc-900 text-center font-semibold"
               >
                 AICTE Bureau
               </Link>
               <Link
                 href="/student/overview"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl bg-white/5 text-white text-center"
+                className="px-3 py-2 rounded-xl bg-zinc-100 text-zinc-900 text-center font-semibold"
               >
                 Student Portal
               </Link>
               <Link
                 href="/verifier/overview"
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl bg-white/5 text-white text-center col-span-2"
+                className="px-3 py-2 rounded-xl bg-zinc-100 text-zinc-900 text-center col-span-2 font-semibold"
               >
                 External Verifier Portal
               </Link>
@@ -385,11 +384,11 @@ export function AppShell({ children }: AppShellProps) {
         {/* Workspace Sidebar (when inside a portal) */}
         {!isPublic && currentNav.length > 0 && (
           <aside className="w-full lg:w-64 once-card rounded-3xl p-5 flex-shrink-0 space-y-5 h-fit lg:sticky lg:top-20">
-            <div className="pb-3 border-b border-white/10">
-              <div className="text-[10px] uppercase font-semibold text-zinc-500 tracking-wider">
+            <div className="pb-3 border-b border-zinc-100">
+              <div className="text-[10px] uppercase font-semibold text-zinc-400 tracking-wider">
                 {isInstitution ? 'Institution Workspace' : isAicte ? 'Regulation Bureau' : isStudent ? 'Citizen Workspace' : 'Verifier Console'}
               </div>
-              <div className="text-xs font-bold text-white mt-1 truncate">
+              <div className="text-xs font-bold text-zinc-900 mt-1 truncate">
                 {currentUser.institutionName || (isAicte ? 'AICTE Central HQ, New Delhi' : isVerifier ? 'TCS Background Services' : 'Student Identity Desk')}
               </div>
             </div>
@@ -404,16 +403,16 @@ export function AppShell({ children }: AppShellProps) {
                     href={item.href}
                     className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                       isActive
-                        ? 'bg-white/15 text-white font-semibold shadow-sm border border-white/15'
-                        : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                        ? 'bg-zinc-900 text-white font-semibold shadow-sm'
+                        : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <IconComponent className={`w-4 h-4 ${isActive ? 'text-[#ffcd75]' : 'text-zinc-400'}`} />
+                      <IconComponent className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-zinc-500'}`} />
                       <span>{item.label}</span>
                     </div>
                     {item.badge && (
-                      <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                      <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
                         {item.badge}
                       </span>
                     )}
@@ -423,9 +422,9 @@ export function AppShell({ children }: AppShellProps) {
             </nav>
 
             {/* Quick Context Card */}
-            <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-[11px] text-zinc-400">
-              <div className="flex items-center gap-2 font-medium text-white mb-1">
-                <Shield className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="p-3.5 rounded-2xl bg-zinc-50 border border-zinc-100 text-[11px] text-zinc-600">
+              <div className="flex items-center gap-2 font-semibold text-zinc-900 mb-1">
+                <Shield className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Zero Trust Active</span>
               </div>
               <p className="text-[10px] text-zinc-500 leading-relaxed">
@@ -443,9 +442,9 @@ export function AppShell({ children }: AppShellProps) {
 
       {/* Persistent Toast notification */}
       {resetSuccessToast && (
-        <div className="fixed bottom-6 right-6 z-50 once-dock text-emerald-300 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-fade-in">
-          <Check className="w-4 h-4 text-emerald-400" />
-          <span className="text-xs font-medium">Synthetic database reset to initial 10 test scenarios.</span>
+        <div className="fixed bottom-6 right-6 z-50 once-dock text-emerald-800 border-emerald-200 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-fade-in">
+          <Check className="w-4 h-4 text-emerald-600" />
+          <span className="text-xs font-semibold">Synthetic database reset to initial 10 test scenarios.</span>
         </div>
       )}
     </div>

@@ -33,89 +33,79 @@ export default function SignInPage() {
       desc: 'Full administrative access for managing programmes, users, and regulatory returns.',
       route: '/institution/overview',
       icon: Building2,
-      badge: 'Institution Scope',
+      badge: 'Institution Head',
     },
     {
-      key: 'INSTITUTION_OPERATOR',
-      name: 'Priya Verma',
-      roleLabel: 'Admissions Data Operator',
+      key: 'INSTITUTION_NODAL',
+      name: 'Prof. Ananya Sen',
+      roleLabel: 'Nodal Officer / Registrar',
       org: 'Delhi Institute of Technology & Engineering [DIT-DEL-01]',
-      desc: 'Operational access for uploading CSV batches, single admissions, and resolving data issues.',
-      route: '/institution/uploads',
-      icon: GraduationCap,
-      badge: 'Data Entry Scope',
+      desc: 'Operational uploads, APAAR registry mismatch resolution, duplicate case evidence.',
+      route: '/institution/upload-centre',
+      icon: Users,
+      badge: 'Data Officer',
     },
     {
-      key: 'AICTE_REVIEWER',
-      name: 'Vikram Nair',
-      roleLabel: 'AICTE Regional Reviewer / Regulator',
-      org: 'AICTE Northern Regional Bureau',
-      desc: 'National oversight, cross-institution duplicate review, intake monitoring, and reports.',
-      route: '/aicte/overview',
+      key: 'AICTE_ADMIN',
+      name: 'Er. Vivek Kulkarni',
+      roleLabel: 'AICTE Director (Regulation Bureau)',
+      org: 'AICTE HQ, Nelson Mandela Marg, New Delhi',
+      desc: 'National intake intelligence, capacity compliance, duplicate adjudication, audit logs.',
+      route: '/aicte/enrolment-intelligence',
       icon: ShieldCheck,
-      badge: 'Regulator Scope',
-    },
-    {
-      key: 'AICTE_POLICY_ADMIN',
-      name: 'Dr. S. K. Gupta',
-      roleLabel: 'Policy Bureau Director',
-      org: 'AICTE Policy & Academic Standards Division',
-      desc: 'Authoring Policy-as-Code rules, intake compliance algorithms, and sanctions matrix.',
-      route: '/aicte/policies',
-      icon: Sliders,
-      badge: 'Policy Scope',
+      badge: 'Central Regulator',
     },
     {
       key: 'STUDENT',
-      name: 'Kabir Singhania',
-      roleLabel: 'Citizen Student (Active Enrolment)',
-      org: 'APAAR ID: 9021-3847-1092',
-      desc: 'View personal academic identity, check active enrolments, and approve or deny verifications.',
-      route: '/student/overview',
-      icon: Users,
-      badge: 'Citizen Scope',
+      name: 'Aarav Mehta',
+      roleLabel: 'Registered Citizen Student',
+      org: 'APAAR ID: 9823-4412-8901 (Masked: XXXX-XXXX-8901)',
+      desc: 'View enrolment status, audit log of verifier unmasking, grant third-party consent.',
+      route: '/student/profile',
+      icon: GraduationCap,
+      badge: 'Student / Citizen',
     },
     {
-      key: 'EXTERNAL_VERIFIER',
-      name: 'Aditi Rao',
-      roleLabel: 'Corporate HR Verifier',
-      org: 'Tata Consultancy Services - Talent Operations',
-      desc: 'Request academic checks, inspect verified results, and query validation tokens.',
-      route: '/verifier/overview',
+      key: 'VERIFIER',
+      name: 'TCS Campus Talent Screening',
+      roleLabel: 'Authorized Background Verifier',
+      org: 'Tata Consultancy Services - Enterprise BG Verifier #BGV-491',
+      desc: 'Verify single/bulk student academic enrolment records, scan tamper-evident QR proofs.',
+      route: '/verifier/verify',
       icon: Search,
-      badge: 'Verifier Scope',
+      badge: 'Corporate Verifier',
     },
   ];
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    const targetPersona = personas.find((p) => p.key === selectedRole);
     switchUser(selectedRole);
+    const chosen = personas.find((p) => p.key === selectedRole);
 
     setTimeout(() => {
-      setIsSubmitting(false);
-      router.push(targetPersona ? targetPersona.route : '/institution/overview');
+      if (chosen) {
+        router.push(chosen.route);
+      }
     }, 400);
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-zinc-950 font-sans text-white">
+    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans text-zinc-900">
       <div className="max-w-4xl w-full space-y-8">
         
         {/* Header */}
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md mb-4">
-            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#ffcd75]" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1.5 shadow-sm mb-4">
+            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700 flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
               SIH Sandbox Authentication Gateway
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Access <span className="bg-gradient-to-r from-white via-white to-[#ffcd75] bg-clip-text text-transparent">APAAR ONE</span>
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950">
+            Access <span className="text-zinc-900 underline decoration-amber-400 decoration-wavy underline-offset-8">APAAR ONE</span>
           </h1>
-          <p className="mt-2 text-sm text-zinc-400">
+          <p className="mt-2 text-sm text-zinc-600">
             Select a verified persona to test role-specific workflows across institutions, regulators, students, or employers.
           </p>
         </div>
@@ -133,26 +123,32 @@ export default function SignInPage() {
                   onClick={() => setSelectedRole(persona.key)}
                   className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                     isSelected
-                      ? 'bg-white/10 border-white/40 shadow-xl scale-[1.02]'
-                      : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+                      ? 'bg-zinc-900 text-white border-zinc-900 shadow-md scale-[1.02]'
+                      : 'bg-white text-zinc-900 border-zinc-200/80 hover:border-zinc-300 hover:shadow-sm'
                   }`}
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <div className="p-2 rounded-xl bg-white/10 text-white">
-                      <IconComp className="w-5 h-5 text-[#ffcd75]" />
+                    <div className={`p-2 rounded-xl ${isSelected ? 'bg-white/10 text-amber-300' : 'bg-zinc-100 text-zinc-700'}`}>
+                      <IconComp className="w-5 h-5" />
                     </div>
-                    <span className="text-[10px] font-semibold text-zinc-400 border border-white/10 px-2 py-0.5 rounded-full bg-white/5">
+                    <span className={`text-[10px] font-semibold border px-2 py-0.5 rounded-full ${
+                      isSelected 
+                        ? 'border-white/20 bg-white/10 text-zinc-200' 
+                        : 'border-zinc-200 bg-zinc-50 text-zinc-600'
+                    }`}>
                       {persona.badge}
                     </span>
                   </div>
 
-                  <h3 className="font-bold text-sm text-white">{persona.name}</h3>
-                  <p className="text-xs text-amber-300 font-medium mt-0.5">{persona.roleLabel}</p>
-                  <p className="text-[11px] text-zinc-400 mt-1 line-clamp-1">{persona.org}</p>
+                  <h3 className={`font-bold text-sm ${isSelected ? 'text-white' : 'text-zinc-950'}`}>{persona.name}</h3>
+                  <p className={`text-xs font-medium mt-0.5 ${isSelected ? 'text-amber-300' : 'text-amber-700'}`}>{persona.roleLabel}</p>
+                  <p className={`text-[11px] mt-1 line-clamp-1 ${isSelected ? 'text-zinc-300' : 'text-zinc-500'}`}>{persona.org}</p>
 
-                  <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px]">
-                    <span className="text-zinc-500">Destination:</span>
-                    <span className="font-mono text-zinc-300">{persona.route}</span>
+                  <div className={`mt-3 pt-2 border-t flex items-center justify-between text-[11px] ${
+                    isSelected ? 'border-white/10 text-zinc-300' : 'border-zinc-100 text-zinc-500'
+                  }`}>
+                    <span>Destination:</span>
+                    <span className="font-mono">{persona.route}</span>
                   </div>
                 </div>
               );
@@ -160,21 +156,21 @@ export default function SignInPage() {
           </div>
 
           {/* Credentials Card */}
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <div className="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
                 <Lock className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-semibold text-white">Passkey & MFA Simulation</div>
-                <div className="text-[11px] text-zinc-400">Pre-authenticated for smart evaluator walkthroughs</div>
+                <div className="text-xs font-semibold text-zinc-950">Passkey & MFA Simulation</div>
+                <div className="text-[11px] text-zinc-500">Pre-authenticated for smart evaluator walkthroughs</div>
               </div>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-xl"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-zinc-950 text-white font-semibold text-xs sm:text-sm hover:bg-zinc-800 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-md"
             >
               <span>{isSubmitting ? 'Entering Workspace...' : 'Enter Selected Portal'}</span>
               <ArrowRight className="w-4 h-4" />
