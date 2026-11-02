@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, ShieldCheck, Lock, EyeOff, FileText, CheckCircle2, History, AlertTriangle } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Lock } from 'lucide-react';
 
 export default function SecurityPrivacyPage() {
   const safeguards = [
@@ -29,15 +29,14 @@ export default function SecurityPrivacyPage() {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto py-12 space-y-12 font-sans text-zinc-900">
+    <div className="max-w-4xl mx-auto py-12 space-y-12 font-sans text-zinc-900">
       {/* Header */}
       <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-zinc-700 text-xs font-semibold shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-200 bg-zinc-50 text-zinc-700 text-xs font-medium">
           <span>Security, Encryption & DPDP Act 2023</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950">
-          Privacy-by-Design <span className="text-zinc-900 underline decoration-amber-400 decoration-wavy underline-offset-8">Safeguards</span>
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-950">
+          Privacy-by-Design Safeguards
         </h1>
         <p className="text-base sm:text-lg text-zinc-600 leading-relaxed">
           How APAAR ONE protects citizen privacy, enforces data minimization, and guarantees cryptographic integrity across every transaction.
@@ -45,11 +44,11 @@ export default function SecurityPrivacyPage() {
       </div>
 
       {/* Safeguards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {safeguards.map((sg, idx) => (
           <div
             key={idx}
-            className="rounded-3xl border border-zinc-200/80 bg-white p-8 shadow-sm space-y-3 hover:border-zinc-300 transition-all hover:shadow hover:-translate-y-1"
+            className="once-card p-6 sm:p-7 space-y-3"
           >
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-semibold text-zinc-600 border border-zinc-200 px-2.5 py-0.5 rounded-full bg-zinc-50 uppercase tracking-wider">
@@ -57,28 +56,28 @@ export default function SecurityPrivacyPage() {
               </span>
               <ShieldCheck className="w-5 h-5 text-emerald-600" />
             </div>
-            <h3 className="text-lg font-bold text-zinc-950">{sg.title}</h3>
+            <h3 className="text-base sm:text-lg font-bold text-zinc-950">{sg.title}</h3>
             <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">{sg.desc}</p>
           </div>
         ))}
       </div>
 
       {/* DPDP Compliance Card */}
-      <div className="rounded-3xl border border-zinc-200/80 bg-zinc-50/70 p-8 shadow-sm space-y-4">
-        <h2 className="text-lg font-bold text-zinc-950 flex items-center gap-2">
-          <Lock className="w-5 h-5 text-amber-600" />
+      <div className="once-card p-6 sm:p-8 space-y-4">
+        <h2 className="text-base sm:text-lg font-bold text-zinc-950 flex items-center gap-2">
+          <Lock className="w-5 h-5 text-zinc-900" />
           Digital Personal Data Protection Act (DPDP 2023) Alignment
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-zinc-600 pt-2">
-          <div className="p-4 rounded-2xl bg-white border border-zinc-200 shadow-sm">
+          <div className="p-4 rounded-xl bg-zinc-50 border border-zinc-200">
             <span className="font-bold text-zinc-950 block mb-1">Purpose Limitation</span>
             Data collected solely for academic enrolment validation and capacity compliance.
           </div>
-          <div className="p-4 rounded-2xl bg-white border border-zinc-200 shadow-sm">
+          <div className="p-4 rounded-xl bg-zinc-50 border border-zinc-200">
             <span className="font-bold text-zinc-950 block mb-1">Storage Minimization</span>
             No permanent caching of biometrics, Aadhaar numbers, or financial information.
           </div>
-          <div className="p-4 rounded-2xl bg-white border border-zinc-200 shadow-sm">
+          <div className="p-4 rounded-xl bg-zinc-50 border border-zinc-200">
             <span className="font-bold text-zinc-950 block mb-1">Right to Correction</span>
             Students track and request correction of demographic registry mismatches directly.
           </div>
@@ -92,7 +91,7 @@ export default function SecurityPrivacyPage() {
         </Link>
         <Link 
           href="/help"
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-zinc-950 text-white font-semibold text-xs hover:bg-zinc-800 transition-all hover:scale-105 shadow-sm"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-950 text-white font-medium text-xs hover:bg-zinc-800 transition-all shadow-sm"
         >
           Help & Support Desk
           <ArrowRight className="w-3.5 h-3.5" />

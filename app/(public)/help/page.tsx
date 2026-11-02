@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, HelpCircle, ChevronDown, ChevronUp, Search, Mail, Phone, MessageSquare } from 'lucide-react';
+import { ArrowRight, ChevronDown, ChevronUp, Search, Mail, Phone, MessageSquare } from 'lucide-react';
 
 export default function HelpCentrePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -41,12 +41,11 @@ export default function HelpCentrePage() {
     <div className="max-w-4xl mx-auto py-12 space-y-12 font-sans text-zinc-900">
       {/* Header */}
       <div className="space-y-4 text-center max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-zinc-700 text-xs font-semibold shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-200 bg-zinc-50 text-zinc-700 text-xs font-medium">
           <span>Support & Grievance Desk</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950">
-          Help <span className="text-zinc-900 underline decoration-amber-400 decoration-wavy underline-offset-8">Centre</span>
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-950">
+          Help Centre & Regulations
         </h1>
         <p className="text-sm sm:text-base text-zinc-600">
           Frequently asked questions, regulatory guidelines, and support desk for institutions, students, and verifiers.
@@ -60,7 +59,7 @@ export default function HelpCentrePage() {
             placeholder="Search FAQs, regulations, or error codes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 rounded-full bg-white border border-zinc-200 text-xs sm:text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-zinc-400 shadow-sm transition-all"
+            className="w-full pl-11 pr-4 py-2.5 rounded-full bg-white border border-zinc-200 text-xs sm:text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-zinc-950 shadow-sm transition-all"
           />
         </div>
       </div>
@@ -72,14 +71,14 @@ export default function HelpCentrePage() {
           return (
             <div
               key={idx}
-              className="rounded-2xl border border-zinc-200/80 bg-white overflow-hidden shadow-sm transition-all"
+              className="once-card overflow-hidden transition-all"
             >
               <button
                 onClick={() => setOpenFaq(isOpen ? null : idx)}
-                className="w-full text-left p-5 flex items-center justify-between gap-4 font-semibold text-sm text-zinc-900 hover:text-blue-600 transition-colors"
+                className="w-full text-left p-5 flex items-center justify-between gap-4 font-semibold text-sm text-zinc-900 hover:text-zinc-600 transition-colors"
               >
                 <span>{faq.q}</span>
-                {isOpen ? <ChevronUp className="w-4 h-4 text-amber-600" /> : <ChevronDown className="w-4 h-4 text-zinc-400" />}
+                {isOpen ? <ChevronUp className="w-4 h-4 text-zinc-900" /> : <ChevronDown className="w-4 h-4 text-zinc-400" />}
               </button>
               {isOpen && (
                 <div className="px-5 pb-5 text-xs sm:text-sm text-zinc-600 leading-relaxed border-t border-zinc-100 pt-3">
@@ -93,18 +92,18 @@ export default function HelpCentrePage() {
 
       {/* Support Channels */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
-        <div className="p-5 rounded-2xl bg-white border border-zinc-200/80 shadow-sm text-center space-y-2">
-          <Mail className="w-5 h-5 text-amber-600 mx-auto" />
+        <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200 text-center space-y-1.5">
+          <Mail className="w-5 h-5 text-zinc-700 mx-auto" />
           <span className="font-bold text-xs text-zinc-950 block">Email Support</span>
           <span className="text-[11px] text-zinc-500 font-mono">helpdesk@aicte-india.org</span>
         </div>
-        <div className="p-5 rounded-2xl bg-white border border-zinc-200/80 shadow-sm text-center space-y-2">
-          <Phone className="w-5 h-5 text-emerald-600 mx-auto" />
+        <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200 text-center space-y-1.5">
+          <Phone className="w-5 h-5 text-zinc-700 mx-auto" />
           <span className="font-bold text-xs text-zinc-950 block">Toll-Free Helpline</span>
           <span className="text-[11px] text-zinc-500 font-mono">1800-11-2024 (9AM - 6PM)</span>
         </div>
-        <div className="p-5 rounded-2xl bg-white border border-zinc-200/80 shadow-sm text-center space-y-2">
-          <MessageSquare className="w-5 h-5 text-purple-600 mx-auto" />
+        <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200 text-center space-y-1.5">
+          <MessageSquare className="w-5 h-5 text-zinc-700 mx-auto" />
           <span className="font-bold text-xs text-zinc-950 block">Grievance Portal</span>
           <span className="text-[11px] text-zinc-500">Central Redressal Desk</span>
         </div>
@@ -117,7 +116,7 @@ export default function HelpCentrePage() {
         </Link>
         <Link 
           href="/sign-in"
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-zinc-950 text-white font-semibold text-xs hover:bg-zinc-800 transition-all hover:scale-105 shadow-sm"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-950 text-white font-medium text-xs hover:bg-zinc-800 transition-all shadow-sm"
         >
           Sign In to Portals
           <ArrowRight className="w-3.5 h-3.5" />

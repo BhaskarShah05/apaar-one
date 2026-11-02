@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Database, ShieldCheck, Scale, QrCode, FileText, CheckCircle2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function HowItWorksPage() {
   const lifecycleSteps = [
@@ -44,15 +44,14 @@ export default function HowItWorksPage() {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto py-12 space-y-12 font-sans text-zinc-900">
+    <div className="max-w-4xl mx-auto py-12 space-y-12 font-sans text-zinc-900">
       {/* Header */}
       <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-200 bg-white text-zinc-700 text-xs font-semibold shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-200 bg-zinc-50 text-zinc-700 text-xs font-medium">
           <span>System Architecture & Lifecycle</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-950">
-          How <span className="text-zinc-900 underline decoration-amber-400 decoration-wavy underline-offset-8">APAAR ONE</span> Works
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-950">
+          How APAAR ONE Works
         </h1>
         <p className="text-base sm:text-lg text-zinc-600 leading-relaxed">
           From institutional admission filing to cryptographic employer verification, every transaction is audited, privacy-preserved, and mathematically validated.
@@ -64,19 +63,19 @@ export default function HowItWorksPage() {
         {lifecycleSteps.map((s, idx) => (
           <div
             key={idx}
-            className="rounded-3xl border border-zinc-200/80 bg-white p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-start gap-6 hover:border-zinc-300 transition-all hover:shadow"
+            className="once-card p-6 sm:p-7 flex flex-col md:flex-row items-start gap-6"
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-900 font-mono font-bold text-xl flex-shrink-0 border border-zinc-200">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900 font-mono font-bold text-lg flex-shrink-0 border border-zinc-200">
               {s.num}
             </div>
             <div className="flex-1 space-y-2">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="text-lg font-bold text-zinc-950">{s.title}</h3>
+                <h3 className="text-base sm:text-lg font-bold text-zinc-950">{s.title}</h3>
                 <span className="text-[10px] font-semibold text-zinc-600 border border-zinc-200 px-2.5 py-0.5 rounded-full bg-zinc-50 uppercase tracking-wider">
                   {s.badge}
                 </span>
               </div>
-              <p className="text-xs text-amber-700 font-semibold">Actor: {s.actor}</p>
+              <p className="text-xs text-zinc-500 font-medium">Actor: {s.actor}</p>
               <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">{s.desc}</p>
             </div>
           </div>
@@ -90,7 +89,7 @@ export default function HowItWorksPage() {
         </Link>
         <Link 
           href="/features"
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-zinc-950 text-white font-semibold text-xs hover:bg-zinc-800 transition-all hover:scale-105 shadow-sm"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-950 text-white font-medium text-xs hover:bg-zinc-800 transition-all shadow-sm"
         >
           View Feature Capabilities
           <ArrowRight className="w-3.5 h-3.5" />

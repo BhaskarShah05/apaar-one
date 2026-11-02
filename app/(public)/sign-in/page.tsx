@@ -9,19 +9,14 @@ import {
   Search, 
   ShieldCheck, 
   ArrowRight, 
-  Key, 
   Lock, 
-  CheckCircle2,
-  Users,
-  Sparkles,
-  Sliders
+  Users
 } from 'lucide-react';
 
 export default function SignInPage() {
   const router = useRouter();
-  const { switchUser, activeAcademicYear } = useAuth();
+  const { switchUser } = useAuth();
   const [selectedRole, setSelectedRole] = useState<string>('INSTITUTION_ADMIN');
-  const [mfaCode, setMfaCode] = useState<string>('748192');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const personas = [
@@ -87,7 +82,7 @@ export default function SignInPage() {
       if (chosen) {
         router.push(chosen.route);
       }
-    }, 400);
+    }, 300);
   };
 
   return (
@@ -95,17 +90,16 @@ export default function SignInPage() {
       <div className="max-w-4xl w-full space-y-8">
         
         {/* Header */}
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1.5 shadow-sm mb-4">
-            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700 flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              SIH Sandbox Authentication Gateway
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 mb-2">
+            <span className="text-xs font-medium text-zinc-700">
+              Authentication & Role Selection
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-950">
-            Access <span className="text-zinc-900 underline decoration-amber-400 decoration-wavy underline-offset-8">APAAR ONE</span>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
+            Access APAAR ONE Portals
           </h1>
-          <p className="mt-2 text-sm text-zinc-600">
+          <p className="text-sm text-zinc-600 max-w-lg mx-auto">
             Select a verified persona to test role-specific workflows across institutions, regulators, students, or employers.
           </p>
         </div>
@@ -123,17 +117,17 @@ export default function SignInPage() {
                   onClick={() => setSelectedRole(persona.key)}
                   className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                     isSelected
-                      ? 'bg-zinc-900 text-white border-zinc-900 shadow-md scale-[1.02]'
-                      : 'bg-white text-zinc-900 border-zinc-200/80 hover:border-zinc-300 hover:shadow-sm'
+                      ? 'bg-zinc-950 text-white border-zinc-950 shadow-md scale-[1.01]'
+                      : 'bg-white text-zinc-900 border-zinc-200 hover:border-zinc-300 hover:shadow-sm'
                   }`}
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <div className={`p-2 rounded-xl ${isSelected ? 'bg-white/10 text-amber-300' : 'bg-zinc-100 text-zinc-700'}`}>
-                      <IconComp className="w-5 h-5" />
+                    <div className={`p-2 rounded-xl ${isSelected ? 'bg-zinc-800 text-white' : 'bg-zinc-100 text-zinc-700'}`}>
+                      <IconComp className="w-4 h-4" />
                     </div>
                     <span className={`text-[10px] font-semibold border px-2 py-0.5 rounded-full ${
                       isSelected 
-                        ? 'border-white/20 bg-white/10 text-zinc-200' 
+                        ? 'border-zinc-700 bg-zinc-850 text-zinc-200' 
                         : 'border-zinc-200 bg-zinc-50 text-zinc-600'
                     }`}>
                       {persona.badge}
@@ -141,13 +135,13 @@ export default function SignInPage() {
                   </div>
 
                   <h3 className={`font-bold text-sm ${isSelected ? 'text-white' : 'text-zinc-950'}`}>{persona.name}</h3>
-                  <p className={`text-xs font-medium mt-0.5 ${isSelected ? 'text-amber-300' : 'text-amber-700'}`}>{persona.roleLabel}</p>
-                  <p className={`text-[11px] mt-1 line-clamp-1 ${isSelected ? 'text-zinc-300' : 'text-zinc-500'}`}>{persona.org}</p>
+                  <p className={`text-xs font-medium mt-0.5 ${isSelected ? 'text-zinc-300' : 'text-zinc-600'}`}>{persona.roleLabel}</p>
+                  <p className={`text-[11px] mt-1 line-clamp-1 ${isSelected ? 'text-zinc-400' : 'text-zinc-500'}`}>{persona.org}</p>
 
                   <div className={`mt-3 pt-2 border-t flex items-center justify-between text-[11px] ${
-                    isSelected ? 'border-white/10 text-zinc-300' : 'border-zinc-100 text-zinc-500'
+                    isSelected ? 'border-zinc-800 text-zinc-400' : 'border-zinc-100 text-zinc-500'
                   }`}>
-                    <span>Destination:</span>
+                    <span>Target Route:</span>
                     <span className="font-mono">{persona.route}</span>
                   </div>
                 </div>
@@ -156,21 +150,21 @@ export default function SignInPage() {
           </div>
 
           {/* Credentials Card */}
-          <div className="rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="once-card p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
-                <Lock className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-700">
+                <Lock className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-xs font-semibold text-zinc-950">Passkey & MFA Simulation</div>
-                <div className="text-[11px] text-zinc-500">Pre-authenticated for smart evaluator walkthroughs</div>
+                <div className="text-xs font-semibold text-zinc-950">Pre-Configured Session</div>
+                <div className="text-[11px] text-zinc-500">Instant access for evaluator verification testing</div>
               </div>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-zinc-950 text-white font-semibold text-xs sm:text-sm hover:bg-zinc-800 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-md"
+              className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-zinc-950 text-white font-medium text-xs sm:text-sm hover:bg-zinc-800 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-sm"
             >
               <span>{isSubmitting ? 'Entering Workspace...' : 'Enter Selected Portal'}</span>
               <ArrowRight className="w-4 h-4" />
